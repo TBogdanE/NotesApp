@@ -1,0 +1,31 @@
+{
+  "name": "notesapp",
+  "version": "1.0.0",
+  "description": "Notes and organization app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development --open",
+    "start": "webpack --watch --mode development",
+    "build": "webpack --mode production",
+    "hot": "true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TBogdanE/NotesApp.git"
+  },
+  "author": "Toma Bogdan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TBogdanE/NotesApp/issues"
+  },
+  "homepage": "https://github.com/TBogdanE/NotesApp#readme",
+  "devDependencies": {
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}
