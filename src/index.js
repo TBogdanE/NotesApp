@@ -1,4 +1,4 @@
 import './design.css';
-//import runWebpage from '/homepage.js';
+import { renderPage } from './webpage.js';
 
-//runWebpage();
+renderPage();
