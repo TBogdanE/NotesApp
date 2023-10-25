@@ -1,11 +1,19 @@
 :root {
   font-family: "Alata", sans-serif;
   font-size: 16px;
-  --header: #375f71;
-  --sidemenu: #3f757f;
-  --text1: #468896;
-  --body: #b0d3d4;
-  --text2: #e1efef;
+  --header: #7eaaa1;
+  --sidemenu: #7eaaa1;
+  --text1: #ddeae6;
+  --text2: #507c75;
+  --body: #f5f8f7;
+  --btn: #7eaaa1;
+  --btn-active: #709890;
+  --btn-hover: #6a978f;
+}
+
+@font-face {
+  font-family: 'TitleFont';
+  src: url('../src/assets/fonts/TiltNeon-Regular-VariableFont_XROT\,YROT.ttf') format('woff2');
 }
 
 body {
@@ -18,13 +26,72 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   grid-area: 1 / 1 / 4 / 21;
-  background-color: var(--header);
+  background-color: transparent;
+  border-bottom: 0.5em solid var(--header);
+}
+
+#page-title {
+  color: var(--text2);
+  font-size: 2.2em;
+  padding-left: 1em;
+  font-family: 'TitleFont', sans-serif;
 }
 
 #left-menu {
   grid-area: 4 / 1 / 21 / 5;
   background-color: var(--sidemenu);
+}
+
+.menu-sct {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.menu-title {
+  text-align: center;
+  font-size: 1.5em;
+  width: 9em;
+  color: var(--text1);
+  border-bottom: 0.15em solid var(--text2);
+}
+
+.menu-btn {
+  background-color: var(--btn);
+  font-size: 1.1em;
+  color: var(--text2);
+  margin: 0.4em;
+  width: 11em;
+  height: 2em;
+  text-align: left;
+  transition: 0.1s ease-in-out;
+  border-bottom: 0.1em solid var(--btn-active);
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.menu-btn:hover {
+  color: var(--text1);
+  font-size: 1.15em;
+  border-bottom: 0.2em solid var(--text2);
+}
+
+.menu-add-new-icon {
+  width: 10%;
+}
+
+.active {
+  font-size: 1.15em;
+  color: var(--text1);
+  background-color: var(--btn-active);
+  border-radius: 4px;
 }
 
 main {
