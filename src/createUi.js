@@ -1,41 +1,28 @@
-import {addNewProject} from './createProject';
+import { addNewProject } from "./createProject";
 
 function createNewProjectCardUi() {
-  const content = document.createElement("div");
-  content.id = "main-new-project-ui";
-  
-  const form = document.createElement("form");
+  const card = document.getElementById("main-create-new-project-ui");
+  const nameInput = document.getElementById("main-create-new-project-submit");
+  const submitButton = document.getElementById(
+    "main-create-new-project-submit-btn"
+  );
 
-  const formLabel = document.createElement("label");
-  formLabel.textContent = "Name: ";
-  formLabel.id = "main-new-project";
+  if (card.style.display === "flex") return;
 
-  const nameInput = document.createElement("input");
-  nameInput.type = "text";
-  nameInput.name = "a";
+  card.style.display = "flex";
 
-  const submitButton = document.createElement("input");
-  submitButton.type = "submit";
-  submitButton.value = "Submit";
-  submitButton.addEventListener('click', (event) => {
-    event.preventDefault()
+  submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
     addNewProject(nameInput.value);
+    card.style.display = "none";
   });
-
-  form.appendChild(formLabel);
-  form.appendChild(nameInput);
-  form.appendChild(submitButton);
-  content.appendChild(form);
-  main.appendChild(content);
-
-  return content;
 }
 
 function createProjectMenuBtns(name) {
-    const newProjectBtn = document.createElement('button');
-    newProjectBtn.classList.add('menu-btn');
-    newProjectBtn.textContent = name;
-    return newProjectBtn;
+  const newProjectBtn = document.createElement("button");
+  newProjectBtn.classList.add("menu-btn");
+  newProjectBtn.textContent = name;
+  return newProjectBtn;
 }
 
 export { createNewProjectCardUi, createProjectMenuBtns };

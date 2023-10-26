@@ -3,11 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" href="../src/design.css">
-    <title>Notes</title>
+    <link type="text/css" href="../src/design.css" />
+    <title>TBE Notes</title>
   </head>
   <body>
-    
+    <header>
+      <div id="page-title">Notella - Plan your life</div>
+    </header>
+    <div id="left-menu">
+      <div class="menu-sct" id="menu-principal-sct">
+        <div class="menu-title">
+          <p>Home</p>
+        </div>
+        <button class="menu-btn active" id="menu-btn-all">All</button>
+        <button class="menu-btn" id="menu-btn-today">Today</button>
+        <button class="menu-btn" id="menu-btn-tommorow">Tomorrow</button>
+        <button class="menu-btn" id="menu-btn-week">Next week</button>
+        <button class="menu-btn" id="menu-btn-month">Next Month</button>
+      </div>
+      <div class="menu-sct" id="menu-project-sct">
+        <div class="menu-title">
+          <p>Projects</p>
+        </div>
+        <button class="menu-btn" id="menu-btn-addproject">
+          <!--<img src="../src/assets/icons/add-icon.png" class="menu-add-new-icon">-->
+          <b> + New Project </b>
+        </button>
+      </div>
+    </div>
+    <div id="main">
+      <form id="main-create-new-project-ui">
+        <label for="main-create-new-project-submit" name="new-project-label">
+          Name:
+        </label>
+        <input
+          type="text"
+          id="main-create-new-project-submit"
+          name="new-project-label"
+        />
+        <input type="submit" value="submit" id="main-create-new-project-submit-btn">
+      </form>
+    </div>
     <script src="project.js"></script>
   </body>
 </html>
