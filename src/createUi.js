@@ -1,6 +1,6 @@
 import {addNewProject} from './createProject';
 
-function createNewProjectUi() {
+function createNewProjectCardUi() {
   const content = document.createElement("div");
   content.id = "main-new-project-ui";
   
@@ -31,4 +31,11 @@ function createNewProjectUi() {
   return content;
 }
 
-export { createNewProjectUi };
+function createProjectMenuBtns(name) {
+    const newProjectBtn = document.createElement('button');
+    newProjectBtn.classList.add('menu-btn');
+    newProjectBtn.textContent = name;
+    return newProjectBtn;
+}
+
+export { createNewProjectCardUi, createProjectMenuBtns };
