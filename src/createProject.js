@@ -1,5 +1,6 @@
 //IMPORTS//
 import { createNewProjectCardUi, createProjectMenuBtns } from "./createUi";
+import { addNewNote } from "./createTask";
 
 //VARIABLE DECLARATION
 const main = document.getElementById("main");
@@ -11,9 +12,11 @@ let projectList = [];
 class Project {
   constructor(name) {
     this.name = name;
-    this.projectBtn = document.createElement("button");
-    this.projectBtn.classList.add("menu-project-btn");
-    this.projectBtn.textContent = name;
+    this.noteList = [];
+  }
+
+  addNote(title, text) {
+    this.noteList.push(addNewNote(title, text));
   }
 }
 
@@ -26,7 +29,7 @@ const addNewProject = (name) => {
   const projectName = new Project(name);
   projectList.push(projectName);
   updateProjectMenu(projectList);
-  return projectName;
+  //return projectName;
 }
 
 //updates the project section of the menu with the projects
