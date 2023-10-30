@@ -1,10 +1,10 @@
-//imports
+//IMPORTS//
 import { createNewProjectCardUi, createProjectMenuBtns } from "./createUi";
 
-//variables declaration
+//VARIABLE DECLARATION
 const main = document.getElementById("main");
 const createProjectBtn = document.getElementById("menu-btn-addproject");
-const menuProjectSct = document.getElementById("menu-project-sct");
+const menuProjects = document.getElementById("menu-projects");
 
 let projectList = [];
 
@@ -14,32 +14,28 @@ class Project {
     this.projectBtn = document.createElement("button");
     this.projectBtn.classList.add("menu-project-btn");
     this.projectBtn.textContent = name;
-    return name;
   }
 }
 
-//event listeners
+//EVENT LISTENERS//
 createProjectBtn.addEventListener("click", createNewProjectCardUi);
 
-//functions
-function addNewProject(text) {
-  main.textContent = "";
-  const projectName = new Project(text);
+//FUNCTIONS//
+//called from createUi.js, will create a new project and save it to the array
+const addNewProject = (name) => {
+  const projectName = new Project(name);
   projectList.push(projectName);
-  updateProjectMenu();
-  //menuProjectSct.appendChild(createProjectMenuBtn(projectName.name));
+  updateProjectMenu(projectList);
   return projectName;
 }
 
-function updateProjectMenu() {
-  for(let project of projectList) {
-    menuProjectSct.appendChild(createProjectMenuBtns(project.name));
+//updates the project section of the menu with the projects
+const updateProjectMenu = (projectList) => {
+  menuProjects.textContent = "";
+  for (let projects of projectList) {
+    menuProjects.appendChild(createProjectMenuBtns(projects.name));
   }
 }
 
-/*function createProject() {
-
-}*/
-
-//exports
+//EXPORTS//
 export { projectList, addNewProject };
