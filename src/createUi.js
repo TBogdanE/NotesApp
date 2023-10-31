@@ -15,10 +15,10 @@ const createNewProjectCardUi = () => {
     card.classList.remove("hidden");
   }
 
-  // Define the event listener function
   const newProjectSubmitButtonListener = (event) => {
     event.preventDefault();
     addNewProject(nameInput.value);
+    nameInput.value = '';
     card.classList.add("hidden");
     // Unregister the event listener
     submitButton.removeEventListener("click", newProjectSubmitButtonListener);
