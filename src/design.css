@@ -88,6 +88,7 @@ header {
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  animation: 0.2s linear fadein;
 }
 
 .menu-project-btn {
@@ -148,6 +149,7 @@ header {
   background-color: var(--header);
   border: 0.2em solid var(--btn);
   border-radius: 8px;
+  animation: 0.08s linear fadein;
 }
 
 #main-create-new-project-title {
