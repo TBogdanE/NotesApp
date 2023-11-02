@@ -177,6 +177,7 @@ header {
   background-color: transparent;
   border: 0.1em solid var(--text2);
   border-radius: 8px;
+  color: var(--text1);
 }
 
 #main-create-new-project-input:active {
@@ -230,4 +231,84 @@ header {
   padding: 0.4em;
   margin: 1em;
   animation: 0.08s linear fadein;
+  transition: 0.1s ease-in-out;
+}
+
+#main-create-new-note-btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--text1);
+}
+
+/*UI - New note card  **********************************************************************/
+#new-note-card-ui {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  grid-area: 2 / 2 / 8 / 10;
+  background-color: var(--header);
+  border: 0.2em solid var(--btn);
+  border-radius: 8px;
+  animation: 0.08s linear fadein;
+}
+
+#new-note-card-ui-title {
+  color: var(--text2);
+  text-align: center;
+  font-size: 1.7em;
+  margin: 1.5em;
+  padding: 0.5em;
+  width: 70%;
+  border-bottom: 0.1em solid var(--text2);
+}
+
+#new-note-card-ui-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*#main-create-new-project-label {
+  font-size: 1.3em;
+  color: var(--text2);
+  padding: 1em;
+}*/
+
+#new-note-card-ui-input {
+  width: 20em;
+  height: 1.8em;
+  background-color: red;
+  border: 0.1em solid var(--text2);
+  border-radius: 8px;
+  color: var(--text1);
+}
+
+#new-note-card-ui-input:active {
+  background-color: var(--btn-active);
+}
+
+#new-note-card-ui-input:focus {
+  background-color: var(--btn-active);
+}
+
+#new-note-card-ui-submit {
+  background-color: var(--header);
+  color: var(--text2);
+  width: 5em;
+  height: 2em;
+  border: 0.1em solid var(--text2);
+  border-radius: 8px;
+  margin: 1em;
+  transition: 0.2s ease-in-out;
+}
+
+#new-note-card-ui-submit:hover {
+  background-color: var(--btn-hover);
+  color: var(--text1);
+}
+
+#new-note-card-ui-submit:active {
+  background-color: var(--btn-active);
+  color: var(--text1);
 }

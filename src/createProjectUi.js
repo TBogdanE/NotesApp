@@ -1,8 +1,9 @@
+import { clearDisplay } from "./webpage";
 import { addNewProject } from "./createProject";
+import { addNewNoteBtn, displayNotes } from "./createTaskUi";
 
 //FUNCTIONS//
 //toggles the display mode of the card and it's content used for creating new projects
-
 const createNewProjectCardUi = () => {
   const card = document.getElementById("main-create-new-project-ui");
   const nameInput = document.getElementById("main-create-new-project-input");
@@ -15,10 +16,11 @@ const createNewProjectCardUi = () => {
     card.classList.remove("hidden");
   }
 
+  //button that sumbits the new project
   const newProjectSubmitButtonListener = (event) => {
     event.preventDefault();
     addNewProject(nameInput.value);
-    nameInput.value = '';
+    nameInput.value = "";
     card.classList.add("hidden");
     // Unregister the event listener
     submitButton.removeEventListener("click", newProjectSubmitButtonListener);
@@ -27,25 +29,19 @@ const createNewProjectCardUi = () => {
   submitButton.addEventListener("click", newProjectSubmitButtonListener);
 };
 
-const projectsMain = () => {
-  const main = document.getElementById("main");
-  const topMenu = document.createElement("div");
-  topMenu.id = "main-create-new-note-header";
-  //topMenu.classList.add("fade-in");
-  const newNoteBtn = document.createElement("button");
-  newNoteBtn.id = "main-create-new-note-btn";
-  newNoteBtn.textContent = "+ Create new note";
-  main.appendChild(topMenu);
-  topMenu.appendChild(newNoteBtn);
+const renderMain = () => {
+  //clearDisplay();
+  addNewNoteBtn();
+  //displayNotes();
 };
 
-//creates new buttons for the new user-made projects
-const createProjectMenuBtns = (name) => {
+//creates buttons for the user-made projects
+const createProjectMenuBtns = (project) => {
   const newProjectBtn = document.createElement("button");
   newProjectBtn.classList.add("menu-btn");
-  newProjectBtn.textContent = name;
+  newProjectBtn.textContent = project.name;
   newProjectBtn.addEventListener("click", () => {
-    projectsMain(name);
+    renderMain(project.noteList);
   });
   return newProjectBtn;
 };

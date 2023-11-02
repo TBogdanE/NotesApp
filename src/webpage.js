@@ -1,40 +1,42 @@
-import {projectList} from './createProject';
+import { createProject, projectList } from "./createProject";
 //import {createTask} from './createTask';
 
-function changeMenu() {
-    const menuBtnAll = document.getElementById('menu-btn-all');
-    const menuBtnToday = document.getElementById('menu-btn-today');
-    const menuBtnTommorow = document.getElementById('menu-btn-tommorow');
-    const menuBtnWeek = document.getElementById('menu-btn-week');
-    const menuBtnMonth = document.getElementById('menu-btn-month');
-    
-    menuBtnAll.addEventListener('click', () => {
-        showAll();
-    });
+const menuBtnAll = document.getElementById("menu-btn-all");
+const menuBtnToday = document.getElementById("menu-btn-today");
+const menuBtnTommorow = document.getElementById("menu-btn-tommorow");
+const menuBtnWeek = document.getElementById("menu-btn-week");
+const menuBtnMonth = document.getElementById("menu-btn-month");
 
-    menuBtnToday.addEventListener('click', () => {
-        showToday();
-    });
+const changeMenu = () => {
+  menuBtnAll.addEventListener("click", () => {
+    //showAll();
+  });
 
-    menuBtnTommorow.addEventListener('click', () => {
-        showTommorow();
-    });
+  menuBtnToday.addEventListener("click", () => {
+    //showToday();
+  });
 
-    menuBtnWeek.addEventListener('click', () => {
-        showWeek();
-    });
+  menuBtnTommorow.addEventListener("click", () => {
+    //showTommorow();
+  });
 
-    menuBtnMonth.addEventListener('click', () => {
-        showMonth();
-    });
-}
+  menuBtnWeek.addEventListener("click", () => {
+    //showWeek();
+  });
 
-function showAll {
+  menuBtnMonth.addEventListener("click", () => {
+    //showMonth();
+  });
+};
 
-}
+const renderPage = () => {
+  //changeMenu();
+  //showAll();
+};
 
-function renderPage() {
-    showAll();
-}
+const clearDisplay = () => {
+  const main = document.getElementById("main");
+  main.textContent = '';
+};
 
-export { renderPage };
+export { renderPage, clearDisplay};
