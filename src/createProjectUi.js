@@ -29,9 +29,9 @@ const createNewProjectCardUi = () => {
   submitButton.addEventListener("click", newProjectSubmitButtonListener);
 };
 
-const renderMain = () => {
+const renderMain = (project) => {
   //clearDisplay();
-  addNewNoteBtn();
+  addNewNoteBtn(project);
   //displayNotes();
 };
 
@@ -41,7 +41,7 @@ const createProjectMenuBtns = (project) => {
   newProjectBtn.classList.add("menu-btn");
   newProjectBtn.textContent = project.name;
   newProjectBtn.addEventListener("click", () => {
-    renderMain(project.noteList);
+    renderMain(project);
   });
   return newProjectBtn;
 };

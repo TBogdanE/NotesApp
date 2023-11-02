@@ -17,6 +17,14 @@ class Project {
     this.name = name;
     this.noteList = [];
   }
+
+  get noteList() {
+    return this._noteList;
+  }
+  
+  set noteList(noteList) {
+    this._noteList = noteList;
+  }
 }
 
 //EVENT LISTENERS//

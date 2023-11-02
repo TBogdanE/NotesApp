@@ -12,10 +12,11 @@ class Note {
 }
 
 //creates the new note
-const createNewNote = (noteList, title, text, important, date) => {
+const createNewNote = (project, title, text, important, date) => {
   const note = new Note(title, text, important, date);
   /*pushes the note to it's project array*/
-  //noteList.push(note);
+  project.noteList.push(note);
+  console.log(project.noteList);
 };
 
 //display the notes when project is selected
