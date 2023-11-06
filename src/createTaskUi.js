@@ -61,27 +61,18 @@ const displayNotes = (projects) => {
 const createNoteCard = (note) => {
   const noteCard = document.createElement("div");
   noteCard.id = "note-card";
-  noteCard.appendChild(createCardElements('note-card-title', note.title));
-  noteCard.appendChild(createCardElements('note-card-text', note.text));
-  noteCard.appendChild(createCardElements('note-card-important', note.important));
-  noteCard.appendChild(createCardElements('note-card-date', note.date));
-  /*
-  const title = document.createElement("div");
-  title.id = "note-card-title";
-  title.textContent = note.title;
-  const text = document.createElement("div");
-  text.id = "note-card-text";
-  text.textContent = note.text;
-  const important = document.createElement("div");
-  important.id = "note-card-important";
-  important.textContent = note.important;
-  const date = document.createElement("div");
-  date.id = "note-card-date";
-  date.textContent = note.date;
-  noteCard.appendChild(title);
-  noteCard.appendChild(text);
-  noteCard.appendChild(important);
-  noteCard.appendChild(date);*/
+  noteCard.appendChild(
+    createCardBtns("note-card-btn", "note-card-btn-container", note.doneBtn)
+  );
+  noteCard.appendChild(createCardElements("note-card-title", note.title));
+  noteCard.appendChild(createCardElements("note-card-text", note.text));
+  noteCard.appendChild(
+    createCardElements("note-card-important", note.important)
+  );
+  noteCard.appendChild(createCardElements("note-card-date", note.date));
+  noteCard.appendChild(
+    createCardBtns("note-card-btn", "note-card-btn-container", note.doneBtn)
+  );
   return noteCard;
 };
 
@@ -92,6 +83,18 @@ const createCardElements = (id, text) => {
   paragraph.textContent = text;
   txt.appendChild(paragraph);
   return txt;
+};
+
+const createCardBtns = (btnID, containerID, fct) => {
+  const btnContainer = document.createElement("div");
+  btnContainer.id = containerID;
+  const btn = document.createElement("button");
+  btn.id = btnID;
+  btn.addEventListener('click', (fct) => {
+    console.log(fct);
+  });
+  btnContainer.appendChild(btn);
+  return btnContainer;
 };
 
 export { createNewNoteCardUi, addNewNoteBtn, displayNotes };
