@@ -3,12 +3,13 @@ import { clearDisplay } from "./webpage";
 import {
   createNewProjectCardUi,
   createProjectMenuBtns,
+  updateProjectMenu,
 } from "./createProjectUi";
 
 //VARIABLE DECLARATION
 const main = document.getElementById("main");
 const createProjectBtn = document.getElementById("menu-btn-addproject");
-const menuProjects = document.getElementById("menu-projects");
+
 
 let projectList = [];
 
@@ -21,7 +22,7 @@ class Project {
   get noteList() {
     return this._noteList;
   }
-  
+
   set noteList(noteList) {
     this._noteList = noteList;
   }
@@ -39,13 +40,13 @@ const addNewProject = (name) => {
   //return projectName;
 };
 
-//updates the project section of the menu with the projects
-const updateProjectMenu = (projectList) => {
-  menuProjects.textContent = "";
-  for (let project of projectList) {
-    menuProjects.appendChild(createProjectMenuBtns(project));
+const deleteProject = (project) => {
+  const indexOfProject = projectList.indexOf(project);
+  if(indexOfProject >= 0 && indexOfProject < projectList.length) {
+    projectList.splice(indexOfProject, 1);
+    updateProjectMenu(projectList);
   }
-};
+}
 
 //EXPORTS//
-export { projectList, addNewProject };
+export { projectList, addNewProject, deleteProject };
