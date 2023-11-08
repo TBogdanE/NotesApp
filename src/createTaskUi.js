@@ -50,38 +50,23 @@ const createNewNoteCardUi = (project) => {
       descriptionInput.value,
       setImportant.value,
       setDate.value,
-      setColor
+      setColor.value
     );
     updateNotesMenu(project);
+    titleInput.value = "";
+    descriptionInput.value = "";
+    setColor.value = "#7eaaa1";
     card.classList.add("hidden");
     submitButton.removeEventListener("click", newNoteSubmitButtonListener);
   };
   submitButton.addEventListener("click", newNoteSubmitButtonListener);
 };
 
-//display the notes of a selected project
-const updateNotesMenu = (projects) => {
-  const main = document.getElementById("main");
-  let cardSection = document.getElementById("main-notes-sct");
-  //checks if cardSection isn't already created
-  if (!cardSection) {
-    cardSection = document.createElement("div");
-    cardSection.id = "main-notes-sct";
-    main.appendChild(cardSection);
-  }
-
-  clearDisplay(cardSection);
-  main.appendChild(cardSection);
-  //displays all the notes inside a project
-  for (let note of projects.noteList) {
-    cardSection.appendChild(createNoteCard(note, projects));
-  }
-};
-
 //creates the UI for the card
 const createNoteCard = (note, projects) => {
   const noteCard = document.createElement("div");
   noteCard.classList.add("note-card");
+  noteCard.style.borderColor = note.color;
   noteCard.appendChild(createCardDoneBtn(note));
   noteCard.appendChild(createCardElements("note-card-title", note.title));
   noteCard.appendChild(createCardElements("note-card-text", note.text));
@@ -142,6 +127,25 @@ const createCardDeleteBtn = (note, project) => {
   });
   btnContainer.appendChild(btn);
   return btnContainer;
+};
+
+//display the notes of a selected project
+const updateNotesMenu = (projects) => {
+  const main = document.getElementById("main");
+  let cardSection = document.getElementById("main-notes-sct");
+  //checks if cardSection isn't already created
+  if (!cardSection) {
+    cardSection = document.createElement("div");
+    cardSection.id = "main-notes-sct";
+    main.appendChild(cardSection);
+  }
+
+  clearDisplay(cardSection);
+  main.appendChild(cardSection);
+  //displays all the notes inside a project
+  for (let note of projects.noteList) {
+    cardSection.appendChild(createNoteCard(note, projects));
+  }
 };
 
 export { createNewNoteCardUi, addNewNoteBtn, updateNotesMenu };
