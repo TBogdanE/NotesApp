@@ -9,14 +9,16 @@ const addNewNoteBtn = (project) => {
   const newNoteBtn = document.createElement("button");
   newNoteBtn.id = "main-create-new-note-btn";
   newNoteBtn.textContent = "+ Create new note";
+  //event listener that triggers the UI that takes input for the notes
   newNoteBtn.addEventListener("click", () => {
+    //creates new card UI that takes new note info
     createNewNoteCardUi(project);
   });
   main.appendChild(topMenu);
   topMenu.appendChild(newNoteBtn);
 };
 
-//creates the card for the new note form
+//creates the UI for the new note inputs
 const createNewNoteCardUi = (project) => {
   const card = document.getElementById("new-note-card-ui");
   const titleInput = document.getElementById("new-note-card-ui-title-input");
@@ -27,12 +29,16 @@ const createNewNoteCardUi = (project) => {
   const setDate = document.getElementById("new-note-card-ui-add-date");
   const submitButton = document.getElementById("new-note-card-ui-submit");
 
+  //toggles the card
   if (card.classList.contains("hidden")) {
     card.classList.remove("hidden");
   }
 
+  // event listener that procees with the note creation
   const newNoteSubmitButtonListener = (event) => {
+    //prevents the refresh of the page
     event.preventDefault();
+    //creates the new note with the user inputs
     createNewNote(
       project,
       titleInput.value,
@@ -47,32 +53,29 @@ const createNewNoteCardUi = (project) => {
   submitButton.addEventListener("click", newNoteSubmitButtonListener);
 };
 
-//display the notes when project is selected
+//display the notes of a selected project
 const updateNotesMenu = (projects) => {
   const main = document.getElementById("main");
   let cardSection = document.getElementById("main-notes-sct");
+  //checks if cardSection isn't already created
   if (!cardSection) {
     cardSection = document.createElement("div");
     cardSection.id = "main-notes-sct";
     main.appendChild(cardSection);
   }
-  clearDisp(cardSection);
+
+  clearDisplay(cardSection);
   main.appendChild(cardSection);
+  //displays all the notes inside a project
   for (let note of projects.noteList) {
     cardSection.appendChild(createNoteCard(note, projects));
   }
 };
 
-const clearDisp = (container) => {
-  // Clear all children within the container
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-};
-
+//creates the UI for the card
 const createNoteCard = (note, projects) => {
   const noteCard = document.createElement("div");
-  noteCard.id = "note-card";
+  noteCard.classList.add("note-card");
   noteCard.appendChild(createCardDoneBtn(note));
   noteCard.appendChild(createCardElements("note-card-title", note.title));
   noteCard.appendChild(createCardElements("note-card-text", note.text));
@@ -80,24 +83,28 @@ const createNoteCard = (note, projects) => {
     createCardElements("note-card-important", note.important)
   );
   noteCard.appendChild(createCardElements("note-card-date", note.date));
+  noteCard.appendChild(createCardEditBtn(note));
   noteCard.appendChild(createCardDeleteBtn(note, projects));
   return noteCard;
 };
 
-const createCardElements = (id, text) => {
+//for a better organisation, all the content of the note card
+//will be created using this function
+const createCardElements = (cls, text) => {
   const paragraph = document.createElement("p");
   const txt = document.createElement("div");
-  txt.id = id;
+  txt.classList.add(cls);
   paragraph.textContent = text;
   txt.appendChild(paragraph);
   return txt;
 };
 
+//creates the button that toggles if user did or didn't finish the task
 const createCardDoneBtn = (note) => {
   const btnContainer = document.createElement("div");
-  btnContainer.id = "note-card-btn-container";
+  btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
-  btn.id = "note-card-btn";
+  btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
     note.doneBtn();
   });
@@ -105,13 +112,27 @@ const createCardDoneBtn = (note) => {
   return btnContainer;
 };
 
+//creates the button that toggles if user did or didn't finish the task
+const createCardEditBtn = (note) => {
+  const btnContainer = document.createElement("div");
+  btnContainer.classList.add("note-card-btn-container");
+  const btn = document.createElement("button");
+  btn.classList.add("note-card-btn");
+  btn.addEventListener("click", () => {
+    note.editNote(note);
+  });
+  btnContainer.appendChild(btn);
+  return btnContainer;
+};
+
+//creates the button that deletes the note
 const createCardDeleteBtn = (note, project) => {
   const btnContainer = document.createElement("div");
-  btnContainer.id = "note-card-btn-container";
+  btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
-  btn.id = "note-card-btn";
+  btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
-    note.deleteCard(project);
+    note.deleteNote(project);
   });
   btnContainer.appendChild(btn);
   return btnContainer;
