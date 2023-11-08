@@ -40,7 +40,7 @@ const createNewNoteCardUi = (project) => {
       setImportant.value,
       setDate.value
     );
-    displayNotes(project);
+    updateNotesMenu(project);
     card.classList.add("hidden");
     submitButton.removeEventListener("click", newNoteSubmitButtonListener);
   };
@@ -48,31 +48,39 @@ const createNewNoteCardUi = (project) => {
 };
 
 //display the notes when project is selected
-const displayNotes = (projects) => {
+const updateNotesMenu = (projects) => {
   const main = document.getElementById("main");
-  const cardSection = document.createElement("div");
+  let cardSection = document.getElementById("main-notes-sct");
+  if (!cardSection) {
+    cardSection = document.createElement("div");
+    cardSection.id = "main-notes-sct";
+    main.appendChild(cardSection);
+  }
+  clearDisp(cardSection);
   main.appendChild(cardSection);
-  cardSection.id = "main-notes-sct";
   for (let note of projects.noteList) {
-    cardSection.appendChild(createNoteCard(note));
+    cardSection.appendChild(createNoteCard(note, projects));
   }
 };
 
-const createNoteCard = (note) => {
+const clearDisp = (container) => {
+  // Clear all children within the container
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+};
+
+const createNoteCard = (note, projects) => {
   const noteCard = document.createElement("div");
   noteCard.id = "note-card";
-  noteCard.appendChild(
-    createCardBtns("note-card-btn", "note-card-btn-container", note.doneBtn)
-  );
+  noteCard.appendChild(createCardDoneBtn(note));
   noteCard.appendChild(createCardElements("note-card-title", note.title));
   noteCard.appendChild(createCardElements("note-card-text", note.text));
   noteCard.appendChild(
     createCardElements("note-card-important", note.important)
   );
   noteCard.appendChild(createCardElements("note-card-date", note.date));
-  noteCard.appendChild(
-    createCardBtns("note-card-btn", "note-card-btn-container", note.doneBtn)
-  );
+  noteCard.appendChild(createCardDeleteBtn(note, projects));
   return noteCard;
 };
 
@@ -85,16 +93,28 @@ const createCardElements = (id, text) => {
   return txt;
 };
 
-const createCardBtns = (btnID, containerID, fct) => {
+const createCardDoneBtn = (note) => {
   const btnContainer = document.createElement("div");
-  btnContainer.id = containerID;
+  btnContainer.id = "note-card-btn-container";
   const btn = document.createElement("button");
-  btn.id = btnID;
-  btn.addEventListener('click', (fct) => {
-    console.log(fct);
+  btn.id = "note-card-btn";
+  btn.addEventListener("click", () => {
+    note.doneBtn();
   });
   btnContainer.appendChild(btn);
   return btnContainer;
 };
 
-export { createNewNoteCardUi, addNewNoteBtn, displayNotes };
+const createCardDeleteBtn = (note, project) => {
+  const btnContainer = document.createElement("div");
+  btnContainer.id = "note-card-btn-container";
+  const btn = document.createElement("button");
+  btn.id = "note-card-btn";
+  btn.addEventListener("click", () => {
+    note.deleteCard(project);
+  });
+  btnContainer.appendChild(btn);
+  return btnContainer;
+};
+
+export { createNewNoteCardUi, addNewNoteBtn, updateNotesMenu };
