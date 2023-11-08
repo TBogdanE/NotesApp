@@ -4,13 +4,18 @@ import { projectList } from "./createProject";
 
 //note class structure
 class Note {
-  constructor(title, text, important, date) {
+  constructor(title, text, important, date, color) {
     this.id = this.newId();
     this.title = title;
     this.text = text;
     this.important = important;
     this.date = date;
     this.done = false; // Initialize as not done
+    this.color = this.setColour(color.value);
+  }
+
+  setColour(color) {
+    console.log(color);
   }
 
   newId() {
@@ -23,7 +28,11 @@ class Note {
     console.log("done");
   }
 
-  deleteCard(project) {
+  editNote() {
+    console.log('Edit');
+  }
+
+  deleteNote(project) {
     const noteIndex = project.noteList.findIndex((note) => note.id === this.id);
 
     if (noteIndex !== -1) {
@@ -36,20 +45,11 @@ class Note {
 }
 
 //creates the new note
-const createNewNote = (project, title, text, important, date) => {
-  const note = new Note(title, text, important, date);
+const createNewNote = (project, title, text, important, date, color) => {
+  const note = new Note(title, text, important, date, color);
   /*pushes the note to it's project array*/
   project.noteList.push(note);
   console.log(project.noteList);
 };
-
-/*const deleteNote = (event) => {
-  const noteElements = event.target.closest(".note-card");
-  if (noteElements) {
-    noteElements.remove();
-    displayNotes(project);
-    console.log('removed!');
-  }
-};*/
 
 export { createNewNote };

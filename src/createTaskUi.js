@@ -27,6 +27,11 @@ const createNewNoteCardUi = (project) => {
   );
   const setImportant = document.getElementById("new-note-card-ui-important");
   const setDate = document.getElementById("new-note-card-ui-add-date");
+  const setColor = document.getElementById("new-note-card-ui-color");
+  setColor.addEventListener("input", () => {
+    const selectedColor = setColor.value;
+    return selectedColor;
+  });
   const submitButton = document.getElementById("new-note-card-ui-submit");
 
   //toggles the card
@@ -44,7 +49,8 @@ const createNewNoteCardUi = (project) => {
       titleInput.value,
       descriptionInput.value,
       setImportant.value,
-      setDate.value
+      setDate.value,
+      setColor
     );
     updateNotesMenu(project);
     card.classList.add("hidden");
@@ -112,7 +118,7 @@ const createCardDoneBtn = (note) => {
   return btnContainer;
 };
 
-//creates the button that toggles if user did or didn't finish the task
+//creates the button that let user edit the note content
 const createCardEditBtn = (note) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("note-card-btn-container");
