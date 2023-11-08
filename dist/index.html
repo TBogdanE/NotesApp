@@ -33,7 +33,7 @@
       </div>
     </div>
     <div id="main">
-      <div id="main-create-new-project-ui" class="hidden">
+      <div id="main-create-new-project-card-ui" class="hidden">
         <div id="main-create-new-project-title">Add a new project</div>
         <form id="main-create-new-project-form">
           <!--<label for="main-create-new-project-submit" name="new-project-label" id="main-create-new-project-label">
@@ -58,17 +58,22 @@
         <form id="new-note-card-ui-form">
           <input
             id="new-note-card-ui-title-input"
+            class="new-note-card-ui-input"
             type="text"
             placeholder="Title"
             name="new-note-label"
           />
           <textarea
             id="new-note-card-ui-description-input"
+            class="new-note-card-ui-input"
             placeholder="Description"
           ></textarea>
-          <label for="new-note-card-ui-important">Important:</label>
-          <input id="new-note-card-ui-important" type="checkbox" />
-          <input id="new-note-card-ui-add-date" type="date" />
+          <div id="new-note-card-ui-box">
+            <!--<label for="new-note-card-ui-important">Important:</label>-->
+            <input id="new-note-card-ui-important" type="checkbox" />
+            <input id="new-note-card-ui-add-date" type="date" />
+            <input id="new-note-card-ui-color" value="#7eaaa1" type="color" />
+          </div>
           <button id="new-note-card-ui-submit">Submit</button>
         </form>
       </div>
