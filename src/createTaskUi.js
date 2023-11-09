@@ -20,24 +20,54 @@ const addNewNoteBtn = (project) => {
 
 //creates the UI for the new note inputs
 const createNewNoteCardUi = (project) => {
-  const card = document.getElementById("new-note-card-ui");
-  const titleInput = document.getElementById("new-note-card-ui-title-input");
-  const descriptionInput = document.getElementById(
-    "new-note-card-ui-description-input"
-  );
-  const setImportant = document.getElementById("new-note-card-ui-important");
-  const setDate = document.getElementById("new-note-card-ui-add-date");
-  const setColor = document.getElementById("new-note-card-ui-color");
-  setColor.addEventListener("input", () => {
+  const main = document.getElementById("main");
+  const card = document.createElement("div");
+  card.id = "new-note-card-ui";
+  const cardTitle = document.createElement("div");
+  cardTitle.id = "new-note-card-ui-title";
+  cardTitle.textContent = "Add a new note";
+  const form = document.createElement("form");
+  form.id = "new-note-card-ui-form";
+  const titleInput = document.createElement("input");
+  titleInput.id = "new-note-card-ui-title-input";
+  titleInput.classList.add("new-note-card-ui-input");
+  titleInput.type = "text";
+  titleInput.placeholder = "Title";
+  titleInput.name = "new-note-label";
+  const descriptionInput = document.createElement("textarea");
+  descriptionInput.id = "new-note-card-ui-description-input";
+  descriptionInput.classList.add("new-note-card-ui-input");
+  descriptionInput.placeholder = "Description";
+  const cardBox = document.createElement("div");
+  cardBox.id = "new-note-card-ui-box";
+  const important = document.createElement("input");
+  important.id = "new-note-card-ui-important";
+  important.type = "checkbox";
+  const date = document.createElement("input");
+  date.id = "new-note-card-ui-add-date";
+  date.type = "date";
+  const color = document.createElement("input");
+  color.id = "new-note-card-ui-color";
+  color.value = "#7eaaa1";
+  color.type = "color";
+  color.addEventListener("input", () => {
     const selectedColor = setColor.value;
     return selectedColor;
   });
-  const submitButton = document.getElementById("new-note-card-ui-submit");
+  const submitButton = document.createElement("button");
+  submitButton.textContent = "Submit";
+  submitButton.id = "new-note-card-ui-submit";
 
-  //toggles the card
-  if (card.classList.contains("hidden")) {
-    card.classList.remove("hidden");
-  }
+  main.appendChild(card);
+  card.appendChild(cardTitle);
+  card.appendChild(form);
+  form.appendChild(titleInput);
+  form.appendChild(descriptionInput);
+  form.appendChild(cardBox);
+  cardBox.appendChild(important);
+  cardBox.appendChild(date);
+  cardBox.appendChild(color);
+  form.appendChild(submitButton);
 
   // event listener that procees with the note creation
   const newNoteSubmitButtonListener = (event) => {
@@ -48,14 +78,14 @@ const createNewNoteCardUi = (project) => {
       project,
       titleInput.value,
       descriptionInput.value,
-      setImportant.value,
-      setDate.value,
-      setColor.value
+      important.value,
+      date.value,
+      color.value
     );
     updateNotesMenu(project);
     titleInput.value = "";
     descriptionInput.value = "";
-    setColor.value = "#7eaaa1";
+    color.value = "#7eaaa1";
     card.classList.add("hidden");
     submitButton.removeEventListener("click", newNoteSubmitButtonListener);
   };
@@ -96,10 +126,10 @@ const createCardDoneBtn = (note) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
-  toggleDoneNote(btn, btnContainer, note);
+  toggleDoneNote(btn, note);
   btn.addEventListener("click", () => {
     note.doneBtn();
-    toggleDoneNote(btn, noteCard, note);
+    toggleDoneNote(btn, note);
   });
   btnContainer.appendChild(btn);
   return btnContainer;
@@ -143,6 +173,7 @@ const createCardDeleteBtn = (note, project) => {
 const updateNotesMenu = (projects) => {
   const main = document.getElementById("main");
   let cardSection = document.getElementById("main-notes-sct");
+  
   //checks if cardSection isn't already created
   if (!cardSection) {
     cardSection = document.createElement("div");

@@ -5,20 +5,34 @@ import { addNewNoteBtn, updateNotesMenu } from "./createTaskUi";
 //FUNCTIONS//
 //toggles the display mode of the card and it's content used for creating new projects
 const createNewProjectCardUi = () => {
-  const card = document.getElementById("main-create-new-project-card-ui");
-  const nameInput = document.getElementById("main-create-new-project-input");
-  const submitButton = document.getElementById(
-    "main-create-new-project-submit"
-  );
+  const main = document.getElementById('main');
+  const card = document.createElement("div");
+  card.id = "main-create-new-project-card-ui";
+  const cardTitle = document.createElement("div");
+  cardTitle.id = "main-create-new-project-title";
+  cardTitle.textContent = 'Add a new project';
+  const form = document.createElement("form");
+  form.id = "main-create-new-project-form";
+  const nameInput = document.createElement("input");
+  nameInput.type = 'text';
+  nameInput.id = "main-create-new-project-input";
+  nameInput.placeholder = 'Project Name:';
+  nameInput.name = 'new-project-label';
+  const submitButton = document.createElement('input');
+  submitButton.type = 'submit';
+  submitButton.value = 'Add';
+  submitButton.id = 'main-create-new-project-submit';
 
-  //checks if the card is already selected
-  if (card.classList.contains("hidden")) {
-    card.classList.remove("hidden");
-  }
+  main.appendChild(card);
+  card.appendChild(cardTitle);
+  card.appendChild(form);
+  form.appendChild(nameInput)
+  form.appendChild(submitButton);
 
   //button that sumbits the new project
   const newProjectSubmitButtonListener = (event) => {
     event.preventDefault();
+    clearDisplay(main);
     addNewProject(nameInput.value);
     nameInput.value = "";
     card.classList.add("hidden");
@@ -43,6 +57,7 @@ const createProjectMenuBtns = (project) => {
   const newProjectBtn = document.createElement("button");
   newProjectBtn.classList.add("user-menu-btn");
   newProjectBtn.textContent = project.name;
+  projectsContainer.appendChild(newProjectBtn);
   newProjectBtn.addEventListener("click", () => {
     renderMain(project);
     console.log(project.name);
@@ -50,9 +65,8 @@ const createProjectMenuBtns = (project) => {
 
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("user-menu-delete-btn");
-  projectsContainer.appendChild(newProjectBtn);
   projectsContainer.appendChild(deleteBtn);
-  deleteBtn.addEventListener('click', () => {
+  deleteBtn.addEventListener("click", () => {
     deleteProject(project);
   });
   return projectsContainer;
@@ -60,12 +74,17 @@ const createProjectMenuBtns = (project) => {
 
 //updates the project section of the menu with the projects
 const updateProjectMenu = (projectList) => {
+  const main = document.getElementById("main");
   const menuProjects = document.getElementById("menu-projects");
-  menuProjects.textContent = "";
+  //clearDisplay(main);
+  clearDisplay(menuProjects);
+  //menuProjects.textContent = "";
   for (let project of projectList) {
     menuProjects.appendChild(createProjectMenuBtns(project));
   }
-  console.log(`Project list: ${projectList} \n Number of projects: ${projectList.length}`);
+  console.log(
+    `Project list: ${projectList} \n Number of projects: ${projectList.length}`
+  );
 };
 
 export { createNewProjectCardUi, createProjectMenuBtns, updateProjectMenu };
