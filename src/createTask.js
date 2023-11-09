@@ -38,7 +38,7 @@ class Note {
   }
 
   deleteNote(project) {
-    const noteIndex = project.noteList.findIndex((note) => note.id === this.id);
+    const noteIndex = project.noteList.findIndex((note) => note._id === this._id);
 
     if (noteIndex !== -1) {
       project.noteList.splice(noteIndex, 1);
