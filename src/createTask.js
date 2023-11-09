@@ -11,11 +11,7 @@ class Note {
     this.important = important;
     this.date = date;
     this.done = false; // Initialize as not done
-    this.color = this.setColour(color.value);
-  }
-
-  setColour(color) {
-    console.log(color);
+    this.color = color;
   }
 
   newId() {
@@ -29,7 +25,7 @@ class Note {
   }
 
   editNote() {
-    console.log('Edit');
+    console.log("Edit");
   }
 
   deleteNote(project) {

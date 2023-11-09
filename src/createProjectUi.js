@@ -1,6 +1,6 @@
 import { clearDisplay } from "./webpage";
 import { addNewProject, deleteProject } from "./createProject";
-import { addNewNoteBtn, displayNotes } from "./createTaskUi";
+import { addNewNoteBtn, updateNotesMenu } from "./createTaskUi";
 
 //FUNCTIONS//
 //toggles the display mode of the card and it's content used for creating new projects
@@ -32,7 +32,7 @@ const createNewProjectCardUi = () => {
 const renderMain = (project) => {
   //clearDisplay();
   addNewNoteBtn(project);
-  displayNotes(project);
+  updateNotesMenu(project);
 };
 
 //creates buttons for the user-made projects

@@ -34,9 +34,12 @@ const renderPage = () => {
   //showAll();
 };
 
-const clearDisplay = () => {
-  const main = document.getElementById("main");
-  main.textContent = '';
+const clearDisplay = (container) => {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  //const content = document.getElementById(id);
+  //content.textContent = "";
 };
 
-export { renderPage, clearDisplay};
+export { renderPage, clearDisplay };
