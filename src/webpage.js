@@ -8,29 +8,42 @@ const menuBtnToday = document.getElementById("menu-btn-today");
 const menuBtnTommorow = document.getElementById("menu-btn-tommorow");
 const menuBtnWeek = document.getElementById("menu-btn-week");
 const menuBtnMonth = document.getElementById("menu-btn-month");
+let activeMenuBtn = menuBtnAll;
 
 const changeMenu = () => {
+  const setActiveButton = (newActiveBtn) => {
+    activeMenuBtn.classList.remove("active");
+    activeMenuBtn = newActiveBtn;
+    activeMenuBtn.classList.add("active");
+  };
+
   menuBtnImportant.addEventListener("click", () => {
+    setActiveButton(menuBtnImportant);
     showImportant();
   });
 
   menuBtnAll.addEventListener("click", () => {
+    setActiveButton(menuBtnAll);
     showAll();
   });
 
   menuBtnToday.addEventListener("click", () => {
+    setActiveButton(menuBtnToday);
     //showToday();
   });
 
   menuBtnTommorow.addEventListener("click", () => {
+    setActiveButton(menuBtnTommorow);
     //showTommorow();
   });
 
   menuBtnWeek.addEventListener("click", () => {
+    setActiveButton(menuBtnWeek);
     //showWeek();
   });
 
   menuBtnMonth.addEventListener("click", () => {
+    setActiveButton(menuBtnMonth);
     //showMonth();
   });
 };
@@ -57,7 +70,7 @@ const showImportant = () => {
 
   for (let project of projectList) {
     for (let note of project.noteList) {
-      if (note.important == 'true') {
+      if (note.important == "true") {
         cardSection.appendChild(createNoteCard(note, project));
       }
     }
