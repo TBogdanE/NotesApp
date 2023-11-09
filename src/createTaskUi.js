@@ -96,11 +96,21 @@ const createCardDoneBtn = (note) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
+  toggleDoneNote(btn, btnContainer, note);
   btn.addEventListener("click", () => {
     note.doneBtn();
+    toggleDoneNote(btn, noteCard, note);
   });
   btnContainer.appendChild(btn);
   return btnContainer;
+};
+
+const toggleDoneNote = (btn, note) => {
+  if (note.done) {
+    btn.style.backgroundColor = "green";
+  } else {
+    btn.style.backgroundColor = "transparent";
+  }
 };
 
 //creates the button that let user edit the note content

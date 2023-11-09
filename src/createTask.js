@@ -5,12 +5,12 @@ import { projectList } from "./createProject";
 //note class structure
 class Note {
   constructor(title, text, important, date, color) {
-    this.id = this.newId();
+    this._id = this.newId();
     this.title = title;
     this.text = text;
     this.important = important;
     this.date = date;
-    this.done = false; // Initialize as not done
+    this.done = false;
     this.color = color;
   }
 
@@ -20,9 +20,18 @@ class Note {
     return id;
   }
   doneBtn() {
-    //this.done = true;
-    console.log("done");
+    this.done = !this.done;
+    console.log(this.done);
+    console.log(this);
   }
+
+  /*doneBtnColor(btn) {
+    if(this.done) {
+      btn.style.backgroundColor = 'red';
+    } else {
+      btn.style.backgroundColor = 'transparent';
+    }
+  }*/
 
   editNote() {
     console.log("Edit");
