@@ -1,32 +1,32 @@
-import { clearDisplay } from "./webpage";
+import { clearDisplay, setActiveBtn } from "./webpage";
 import { addNewProject, deleteProject } from "./createProject";
 import { addNewNoteBtn, updateNotesMenu } from "./createTaskUi";
 
 //FUNCTIONS//
 //toggles the display mode of the card and it's content used for creating new projects
 const createNewProjectCardUi = () => {
-  const main = document.getElementById('main');
+  const main = document.getElementById("main");
   const card = document.createElement("div");
   card.id = "main-create-new-project-card-ui";
   const cardTitle = document.createElement("div");
   cardTitle.id = "main-create-new-project-title";
-  cardTitle.textContent = 'Add a new project';
+  cardTitle.textContent = "Add a new project";
   const form = document.createElement("form");
   form.id = "main-create-new-project-form";
   const nameInput = document.createElement("input");
-  nameInput.type = 'text';
+  nameInput.type = "text";
   nameInput.id = "main-create-new-project-input";
-  nameInput.placeholder = 'Project Name:';
-  nameInput.name = 'new-project-label';
-  const submitButton = document.createElement('input');
-  submitButton.type = 'submit';
-  submitButton.value = 'Add';
-  submitButton.id = 'main-create-new-project-submit';
+  nameInput.placeholder = "Project Name:";
+  nameInput.name = "new-project-label";
+  const submitButton = document.createElement("input");
+  submitButton.type = "submit";
+  submitButton.value = "Add";
+  submitButton.id = "main-create-new-project-submit";
 
   main.appendChild(card);
   card.appendChild(cardTitle);
   card.appendChild(form);
-  form.appendChild(nameInput)
+  form.appendChild(nameInput);
   form.appendChild(submitButton);
 
   //button that sumbits the new project
@@ -59,6 +59,7 @@ const createProjectMenuBtns = (project) => {
   newProjectBtn.textContent = project.name;
   projectsContainer.appendChild(newProjectBtn);
   newProjectBtn.addEventListener("click", () => {
+    setActiveBtn(newProjectBtn);
     renderMain(project);
     console.log(project.name);
   });
