@@ -50,10 +50,10 @@ const createNewNoteCardUi = (project) => {
   color.id = "new-note-card-ui-color";
   color.value = "#7eaaa1";
   color.type = "color";
-  color.addEventListener("input", () => {
-    const selectedColor = setColor.value;
+  /*color.addEventListener("input", () => {
+    const selectedColor = color.value;
     return selectedColor;
-  });
+  });*/
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
   submitButton.id = "new-note-card-ui-submit";
@@ -173,7 +173,7 @@ const createCardDeleteBtn = (note, project) => {
 const updateNotesMenu = (projects) => {
   const main = document.getElementById("main");
   let cardSection = document.getElementById("main-notes-sct");
-  
+
   //checks if cardSection isn't already created
   if (!cardSection) {
     cardSection = document.createElement("div");
