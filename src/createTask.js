@@ -19,26 +19,19 @@ class Note {
     console.log(`Random character: ${id}`);
     return id;
   }
+
   doneBtn() {
     this.done = !this.done;
-    console.log(this.done);
-    console.log(this);
   }
-
-  /*doneBtnColor(btn) {
-    if(this.done) {
-      btn.style.backgroundColor = 'red';
-    } else {
-      btn.style.backgroundColor = 'transparent';
-    }
-  }*/
 
   editNote() {
     console.log("Edit");
   }
 
   deleteNote(project) {
-    const noteIndex = project.noteList.findIndex((note) => note._id === this._id);
+    const noteIndex = project.noteList.findIndex(
+      (note) => note._id === this._id
+    );
 
     if (noteIndex !== -1) {
       project.noteList.splice(noteIndex, 1);

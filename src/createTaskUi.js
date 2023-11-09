@@ -43,6 +43,10 @@ const createNewNoteCardUi = (project) => {
   const important = document.createElement("input");
   important.id = "new-note-card-ui-important";
   important.type = "checkbox";
+  important.value = "false";
+  important.addEventListener("click", () => {
+    important.value = "false" ? "true" : "false";
+  });
   const date = document.createElement("input");
   date.id = "new-note-card-ui-add-date";
   date.type = "date";
@@ -50,10 +54,6 @@ const createNewNoteCardUi = (project) => {
   color.id = "new-note-card-ui-color";
   color.value = "#7eaaa1";
   color.type = "color";
-  /*color.addEventListener("input", () => {
-    const selectedColor = color.value;
-    return selectedColor;
-  });*/
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
   submitButton.id = "new-note-card-ui-submit";
@@ -189,4 +189,4 @@ const updateNotesMenu = (projects) => {
   }
 };
 
-export { createNewNoteCardUi, addNewNoteBtn, updateNotesMenu };
+export { createNewNoteCardUi, addNewNoteBtn, updateNotesMenu, createNoteCard };

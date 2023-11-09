@@ -74,9 +74,8 @@ const createProjectMenuBtns = (project) => {
 
 //updates the project section of the menu with the projects
 const updateProjectMenu = (projectList) => {
-  const main = document.getElementById("main");
+  //const main = document.getElementById("main");
   const menuProjects = document.getElementById("menu-projects");
-  //clearDisplay(main);
   clearDisplay(menuProjects);
   //menuProjects.textContent = "";
   for (let project of projectList) {
