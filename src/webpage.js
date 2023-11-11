@@ -10,63 +10,45 @@ const menuBtnWeek = document.getElementById("menu-btn-week");
 const menuBtnMonth = document.getElementById("menu-btn-month");
 let activeMenuBtn = menuBtnAll;
 
-const changeMenu = () => {
-  const setActiveButton = (newActiveBtn) => {
-    activeMenuBtn.classList.remove("active");
-    activeMenuBtn = newActiveBtn;
-    activeMenuBtn.classList.add("active");
-  };
-
-  menuBtnImportant.addEventListener("click", () => {
-    setActiveButton(menuBtnImportant);
-    showImportant();
-  });
-
-  menuBtnAll.addEventListener("click", () => {
-    setActiveButton(menuBtnAll);
-    showAll();
-  });
-
-  menuBtnToday.addEventListener("click", () => {
-    setActiveButton(menuBtnToday);
-    //showToday();
-  });
-
-  menuBtnTommorow.addEventListener("click", () => {
-    setActiveButton(menuBtnTommorow);
-    //showTommorow();
-  });
-
-  menuBtnWeek.addEventListener("click", () => {
-    setActiveButton(menuBtnWeek);
-    //showWeek();
-  });
-
-  menuBtnMonth.addEventListener("click", () => {
-    setActiveButton(menuBtnMonth);
-    //showMonth();
-  });
-};
-
 const renderPage = () => {
   showAll();
   changeMenu();
 };
 
+const changeMenu = () => {
+  menuBtnImportant.addEventListener("click", () => {
+    setActiveBtn(menuBtnImportant);
+    showImportant();
+  });
+
+  menuBtnAll.addEventListener("click", () => {
+    setActiveBtn(menuBtnAll);
+    showAll();
+  });
+
+  menuBtnToday.addEventListener("click", () => {
+    setActiveBtn(menuBtnToday);
+    showToday();
+  });
+
+  menuBtnTommorow.addEventListener("click", () => {
+    setActiveBtn(menuBtnTommorow);
+    showTomorrow();
+  });
+
+  menuBtnWeek.addEventListener("click", () => {
+    setActiveBtn(menuBtnWeek);
+    showWeek();
+  });
+
+  menuBtnMonth.addEventListener("click", () => {
+    setActiveBtn(menuBtnMonth);
+    showMonth();
+  });
+};
+
 const showImportant = () => {
-  console.log("Show Important");
-  const main = document.getElementById("main");
-  let cardSection = document.getElementById("main-notes-sct");
-
-  if (!cardSection) {
-    cardSection = document.createElement("div");
-    cardSection.id = "main-notes-sct";
-    main.appendChild(cardSection);
-  }
-
-  clearDisplay(main);
-  clearDisplay(cardSection);
-  main.appendChild(cardSection);
+  const cardSection = renderMenuContains();
 
   for (let project of projectList) {
     for (let note of project.noteList) {
@@ -78,7 +60,39 @@ const showImportant = () => {
 };
 
 const showAll = () => {
-  console.log("show all");
+  const cardSection = renderMenuContains();
+
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      cardSection.appendChild(createNoteCard(note, project));
+    }
+  }
+};
+
+const showToday = () => {
+  renderMenuContains();
+};
+
+const showTomorrow = () => {
+  renderMenuContains();
+};
+
+const showWeek = () => {
+  renderMenuContains();
+};
+
+const showMonth = () => {
+  renderMenuContains();
+};
+
+const setActiveBtn = (newActiveBtn) => {
+  activeMenuBtn.classList.remove("active");
+  activeMenuBtn = newActiveBtn;
+  activeMenuBtn.classList.add("active");
+  return activeMenuBtn;
+};
+
+const renderMenuContains = () => {
   const main = document.getElementById("main");
   let cardSection = document.getElementById("main-notes-sct");
 
@@ -91,12 +105,7 @@ const showAll = () => {
   clearDisplay(main);
   clearDisplay(cardSection);
   main.appendChild(cardSection);
-
-  for (let project of projectList) {
-    for (let note of project.noteList) {
-      cardSection.appendChild(createNoteCard(note, project));
-    }
-  }
+  return cardSection;
 };
 
 const clearDisplay = (container) => {
@@ -107,4 +116,15 @@ const clearDisplay = (container) => {
   //content.textContent = "";
 };
 
-export { renderPage, clearDisplay };
+export {
+  showImportant,
+  showAll,
+  showToday,
+  showTomorrow,
+  showWeek,
+  showMonth,
+  activeMenuBtn,
+  renderPage,
+  clearDisplay,
+  setActiveBtn,
+};

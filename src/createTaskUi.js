@@ -1,4 +1,13 @@
-import { clearDisplay } from "./webpage";
+import {
+  showImportant,
+  showAll,
+  showToday,
+  showTomorrow,
+  showWeek,
+  showMonth,
+  activeMenuBtn,
+  clearDisplay,
+} from "./webpage";
 import { createNewNote } from "./createTask";
 
 //creates button that is used for creating new notes
@@ -183,9 +192,32 @@ const updateNotesMenu = (projects) => {
 
   clearDisplay(cardSection);
   main.appendChild(cardSection);
+
   //displays all the notes inside a project
-  for (let note of projects.noteList) {
-    cardSection.appendChild(createNoteCard(note, projects));
+  switch (activeMenuBtn.textContent) {
+    case "Important":
+      showImportant();
+      break;
+    case "All":
+      showAll();
+      break;
+    case "Today":
+      showToday();
+      break;
+    case "Tomorrow":
+      showTomorrow();
+      break;
+    case "Next week":
+      showWeek();
+      break;
+    case "Next month":
+      showMonth();
+      break;
+    default:
+      for (let note of projects.noteList) {
+        cardSection.appendChild(createNoteCard(note, projects));
+      }
+      break;
   }
 };
 
