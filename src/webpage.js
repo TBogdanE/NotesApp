@@ -1,21 +1,45 @@
-import { createProject, projectList } from "./createProject";
+import { projectList } from "./createProject";
+import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
 //import {createTask} from './createTask';
 
-const menuBtnImportant = document.getElementById("menu-btn-important");
-const menuBtnAll = document.getElementById("menu-btn-all");
-const menuBtnToday = document.getElementById("menu-btn-today");
-const menuBtnTommorow = document.getElementById("menu-btn-tommorow");
-const menuBtnWeek = document.getElementById("menu-btn-week");
-const menuBtnMonth = document.getElementById("menu-btn-month");
-let activeMenuBtn = menuBtnAll;
-
+//starts the page showing all the notes
 const renderPage = () => {
+  pageInitialisation();
   showAll();
-  changeMenu();
 };
 
-const changeMenu = () => {
+let activeMenuBtn;
+
+const pageInitialisation = () => {
+  const menuBtnImportant = document.getElementById("menu-btn-important");
+  const menuBtnAll = document.getElementById("menu-btn-all");
+  const menuBtnToday = document.getElementById("menu-btn-today");
+  const menuBtnTommorow = document.getElementById("menu-btn-tommorow");
+  const menuBtnWeek = document.getElementById("menu-btn-week");
+  const menuBtnMonth = document.getElementById("menu-btn-month");
+  const createProjectBtn = document.getElementById("menu-btn-addproject");
+  createProjectBtn.addEventListener("click", createNewProjectCardUi);
+  activeMenuBtn = menuBtnAll;
+  changeMenu(
+    menuBtnImportant,
+    menuBtnAll,
+    menuBtnToday,
+    menuBtnTommorow,
+    menuBtnWeek,
+    menuBtnMonth
+  );
+};
+
+//adds event listeners to the menu buttons
+const changeMenu = (
+  menuBtnImportant,
+  menuBtnAll,
+  menuBtnToday,
+  menuBtnTommorow,
+  menuBtnWeek,
+  menuBtnMonth
+) => {
   menuBtnImportant.addEventListener("click", () => {
     setActiveBtn(menuBtnImportant);
     showImportant();
@@ -47,9 +71,11 @@ const changeMenu = () => {
   });
 };
 
+//display's only the notes marked as important
 const showImportant = () => {
   const cardSection = renderMenuContains();
 
+  //goes through all the notes from all the projects and check if are important
   for (let project of projectList) {
     for (let note of project.noteList) {
       if (note.important == "true") {
@@ -59,6 +85,7 @@ const showImportant = () => {
   }
 };
 
+//display's all the notes
 const showAll = () => {
   const cardSection = renderMenuContains();
 
@@ -69,22 +96,27 @@ const showAll = () => {
   }
 };
 
+//display's the notes with today due
 const showToday = () => {
-  renderMenuContains();
+  const cardSection = renderMenuContains();
 };
 
+//display's the notes with tommorow due
 const showTomorrow = () => {
-  renderMenuContains();
+  const cardSection = renderMenuContains();
 };
 
+//display's the notes with this week due
 const showWeek = () => {
-  renderMenuContains();
+  const cardSection = renderMenuContains();
 };
 
+//display's the notes with this month due
 const showMonth = () => {
-  renderMenuContains();
+  const cardSection = renderMenuContains();
 };
 
+//updates which which button is active
 const setActiveBtn = (newActiveBtn) => {
   activeMenuBtn.classList.remove("active");
   activeMenuBtn = newActiveBtn;
@@ -92,6 +124,7 @@ const setActiveBtn = (newActiveBtn) => {
   return activeMenuBtn;
 };
 
+//creates the structure where the notes will be displayed
 const renderMenuContains = () => {
   const main = document.getElementById("main");
   let cardSection = document.getElementById("main-notes-sct");
@@ -108,6 +141,7 @@ const renderMenuContains = () => {
   return cardSection;
 };
 
+//clears the content of the display
 const clearDisplay = (container) => {
   while (container.firstChild) {
     container.removeChild(container.firstChild);

@@ -1,18 +1,12 @@
 //IMPORTS//
-import { clearDisplay } from "./webpage";
-import {
-  createNewProjectCardUi,
-  createProjectMenuBtns,
-  updateProjectMenu,
-} from "./createProjectUi";
+import { updateProjectMenu } from "./createProjectUi";
 
 //VARIABLE DECLARATION
-const main = document.getElementById("main");
-const createProjectBtn = document.getElementById("menu-btn-addproject");
-
+//const main = document.getElementById("main");
 
 let projectList = [];
 
+//class on which other projects will be created
 class Project {
   constructor(name) {
     this.name = name;
@@ -29,7 +23,7 @@ class Project {
 }
 
 //EVENT LISTENERS//
-createProjectBtn.addEventListener("click", createNewProjectCardUi);
+
 
 //FUNCTIONS//
 //called from createProjectUi.js, will create a new project and save it to the array
@@ -42,11 +36,11 @@ const addNewProject = (name) => {
 
 const deleteProject = (project) => {
   const indexOfProject = projectList.indexOf(project);
-  if(indexOfProject >= 0 && indexOfProject < projectList.length) {
+  if (indexOfProject >= 0 && indexOfProject < projectList.length) {
     projectList.splice(indexOfProject, 1);
     updateProjectMenu(projectList);
   }
-}
+};
 
 //EXPORTS//
 export { projectList, addNewProject, deleteProject };
