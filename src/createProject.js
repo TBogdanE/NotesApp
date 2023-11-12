@@ -6,7 +6,7 @@ import { updateProjectMenu } from "./createProjectUi";
 
 let projectList = [];
 
-//class on which other projects will be created
+//the class on which other projects will be created
 class Project {
   constructor(name) {
     this.name = name;
@@ -22,10 +22,6 @@ class Project {
   }
 }
 
-//EVENT LISTENERS//
-
-
-//FUNCTIONS//
 //called from createProjectUi.js, will create a new project and save it to the array
 const addNewProject = (name) => {
   const projectName = new Project(name);
@@ -34,6 +30,7 @@ const addNewProject = (name) => {
   //return projectName;
 };
 
+//handling the logic of deleting projects
 const deleteProject = (project) => {
   const indexOfProject = projectList.indexOf(project);
   if (indexOfProject >= 0 && indexOfProject < projectList.length) {

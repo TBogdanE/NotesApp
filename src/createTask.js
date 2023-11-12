@@ -1,8 +1,7 @@
-import { clearDisplay } from "./webpage";
-import { createNewNoteCardUi, updateNotesMenu } from "./createTaskUi";
-import { projectList } from "./createProject";
+import { updateNotesMenu } from "./createTaskUi";
 
-//note class structure
+const _noteId = [];
+//the class on which other notes will be created
 class Note {
   constructor(title, text, important, date, color) {
     this._id = this.newId();
@@ -16,7 +15,10 @@ class Note {
 
   newId() {
     const id = Math.random().toString(36).substring(2, 12);
-    console.log(`Random character: ${id}`);
+    if(_noteId.includes(id)) {
+      return this.newId();
+    }
+    console.log(`Id: ${id}`);
     return id;
   }
 
@@ -36,8 +38,7 @@ class Note {
     if (noteIndex !== -1) {
       project.noteList.splice(noteIndex, 1);
       updateNotesMenu(project);
-      console.log(`Note: ${this.title} was removed`);
-      console.log(project.noteList);
+      console.log(`Note: ${this.title} from ${project.name} was removed`);
     }
   }
 }
@@ -45,9 +46,8 @@ class Note {
 //creates the new note
 const createNewNote = (project, title, text, important, date, color) => {
   const note = new Note(title, text, important, date, color);
-  /*pushes the note to it's project array*/
+  //pushes the note to it's project noteList
   project.noteList.push(note);
-  console.log(project.noteList);
 };
 
 export { createNewNote };

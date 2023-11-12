@@ -1,3 +1,4 @@
+import { createNewNote } from "./createTask";
 import {
   showImportant,
   showAll,
@@ -8,9 +9,8 @@ import {
   activeMenuBtn,
   clearDisplay,
 } from "./webpage";
-import { createNewNote } from "./createTask";
 
-//creates button that is used for creating new notes
+//creates the button used for creating new notes
 const addNewNoteBtn = (project) => {
   const main = document.getElementById("main");
   const topMenu = document.createElement("div");
@@ -27,28 +27,34 @@ const addNewNoteBtn = (project) => {
   topMenu.appendChild(newNoteBtn);
 };
 
-//creates the UI for the new note inputs
+//creates the UI that takes the input for new notes
 const createNewNoteCardUi = (project) => {
   const main = document.getElementById("main");
   const card = document.createElement("div");
   card.id = "new-note-card-ui";
+
   const cardTitle = document.createElement("div");
   cardTitle.id = "new-note-card-ui-title";
   cardTitle.textContent = "Add a new note";
+
   const form = document.createElement("form");
   form.id = "new-note-card-ui-form";
+
   const titleInput = document.createElement("input");
   titleInput.id = "new-note-card-ui-title-input";
   titleInput.classList.add("new-note-card-ui-input");
   titleInput.type = "text";
   titleInput.placeholder = "Title";
   titleInput.name = "new-note-label";
+
   const descriptionInput = document.createElement("textarea");
   descriptionInput.id = "new-note-card-ui-description-input";
   descriptionInput.classList.add("new-note-card-ui-input");
   descriptionInput.placeholder = "Description";
+
   const cardBox = document.createElement("div");
   cardBox.id = "new-note-card-ui-box";
+
   const important = document.createElement("input");
   important.id = "new-note-card-ui-important";
   important.type = "checkbox";
@@ -56,13 +62,16 @@ const createNewNoteCardUi = (project) => {
   important.addEventListener("click", () => {
     important.value = "false" ? "true" : "false";
   });
+
   const date = document.createElement("input");
   date.id = "new-note-card-ui-add-date";
   date.type = "date";
+
   const color = document.createElement("input");
   color.id = "new-note-card-ui-color";
   color.value = "#7eaaa1";
   color.type = "color";
+
   const submitButton = document.createElement("button");
   submitButton.textContent = "Submit";
   submitButton.id = "new-note-card-ui-submit";
@@ -135,21 +144,17 @@ const createCardDoneBtn = (note) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
-  toggleDoneNote(btn, note);
+  note.done
+    ? (btn.style.backgroundColor = "green")
+    : (btn.style.backgroundColor = "transparent");
   btn.addEventListener("click", () => {
     note.doneBtn();
-    toggleDoneNote(btn, note);
+    note.done
+      ? (btn.style.backgroundColor = "green")
+      : (btn.style.backgroundColor = "transparent");
   });
   btnContainer.appendChild(btn);
   return btnContainer;
-};
-
-const toggleDoneNote = (btn, note) => {
-  if (note.done) {
-    btn.style.backgroundColor = "green";
-  } else {
-    btn.style.backgroundColor = "transparent";
-  }
 };
 
 //creates the button that let user edit the note content

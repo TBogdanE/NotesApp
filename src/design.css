@@ -28,6 +28,37 @@
   }
 }
 
+/* WebKit browsers (Chrome, Safari) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Custom styling for the date input */
+input[type="date"] {
+  background-color: transparent;
+  appearance: none; /* Remove default appearance */
+  color: var(--text2);
+  border: 0.1em solid var(--text2);
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 0.3em;
+}
+
+/* Custom styling for the date picker dropdown */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: transparent;
+}
+
 body {
   display: grid;
   grid-template-rows: repeat(20, 1fr);
@@ -69,7 +100,7 @@ header {
 
 .menu-title {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.7em;
   width: 9em;
   color: var(--text1);
   border-bottom: 0.15em solid var(--text2);
@@ -124,12 +155,12 @@ header {
 }
 
 .user-menu-delete-btn {
-  background-image: url("../src/assets/icons/icon-recycle-bin.png");
-  background-size: cover;
+  background-image: url(../src/assets/icons/icon-recycle-bin.png);
+  background-size: contain;
   background-color: transparent;
-  border: 0;
-  width: 20%;
-  height: 100%;
+  border: 0.1em solid var(--text2);
+  width: 10%;
+  height: 50%;
 }
 
 /*.menu-project-btn {
@@ -192,11 +223,13 @@ header {
   border-radius: 8px;
   animation: 0.08s linear fadein;
   z-index: 4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 #main-create-new-project-title {
   color: var(--text2);
-  font-size: 1.7em;
+  font-size: 2em;
   padding: 2em;
 }
 
@@ -217,17 +250,25 @@ header {
   width: 20em;
   height: 1.8em;
   background-color: var(--body);
-  border: 0.1em solid var(--text2);
+  border: 0.1em solid var(--btn);
   border-radius: 8px;
+  color: var(--text2);
+  outline: none;
+  transition: 0.1s ease-in-out;
+}
+
+#main-create-new-project-input::placeholder {
   color: var(--text2);
 }
 
 #main-create-new-project-input:active {
   background-color: var(--text1);
+  border-radius: 10px;
 }
 
 #main-create-new-project-input:focus {
   background-color: var(--text1);
+  border-radius: 10px;
 }
 
 #main-create-new-project-submit {
@@ -293,6 +334,9 @@ header {
   border-radius: 8px;
   animation: 0.08s linear fade-in-out;
   z-index: 5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 #new-note-card-ui-title {
@@ -354,7 +398,7 @@ header {
 }
 
 #new-note-card-ui-add-date {
-  margin: 1em;  
+  margin: 1em;
 }
 
 #new-note-card-ui-color {
@@ -391,12 +435,18 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  background-color: var(--body);
   width: 90%;
   height: 2em;
   padding: 0.2em;
   margin: 0.3em;
   border: 0.1em solid var(--text2);
   border-radius: 5px;
+  transition: 0.2s ease-in-out;
+}
+
+.note-card:hover {
+  transform: scale(1.01);
 }
 
 .note-card > p {
@@ -406,6 +456,7 @@ header {
 }
 
 .note-card-btn-container {
+  background-color: transparent;
   width: 5%;
   height: 100%;
   display: flex;

@@ -3,21 +3,26 @@ import { addNewProject, deleteProject } from "./createProject";
 import { addNewNoteBtn, updateNotesMenu } from "./createTaskUi";
 
 //FUNCTIONS//
-//toggles the display mode of the card and it's content used for creating new projects
+//creates the UI with the form, used for creating new projects
 const createNewProjectCardUi = () => {
   const main = document.getElementById("main");
+
   const card = document.createElement("div");
   card.id = "main-create-new-project-card-ui";
+
   const cardTitle = document.createElement("div");
   cardTitle.id = "main-create-new-project-title";
   cardTitle.textContent = "Add a new project";
+
   const form = document.createElement("form");
   form.id = "main-create-new-project-form";
+
   const nameInput = document.createElement("input");
   nameInput.type = "text";
   nameInput.id = "main-create-new-project-input";
   nameInput.placeholder = "Project Name:";
   nameInput.name = "new-project-label";
+
   const submitButton = document.createElement("input");
   submitButton.type = "submit";
   submitButton.value = "Add";
@@ -43,13 +48,14 @@ const createNewProjectCardUi = () => {
   submitButton.addEventListener("click", newProjectSubmitButtonListener);
 };
 
+//creates the button used for creating new notes
 const renderMain = (project) => {
   //clearDisplay();
   addNewNoteBtn(project);
   updateNotesMenu(project);
 };
 
-//creates buttons for the user-made projects
+//creates buttons for the user-made projects, used for displayinge projects content
 const createProjectMenuBtns = (project) => {
   const projectsContainer = document.createElement("div");
   projectsContainer.classList.add("user-menu-btn-box");
