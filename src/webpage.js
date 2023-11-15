@@ -1,6 +1,7 @@
 import { projectList } from "./createProject";
 import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
+//date formatting library
 import {
   isToday,
   isTomorrow,
@@ -18,6 +19,7 @@ const renderPage = () => {
 
 let activeMenuBtn;
 
+//initialise all the elements on the page
 const pageInitialisation = () => {
   const menuBtnImportant = document.getElementById("menu-btn-important");
   const menuBtnAll = document.getElementById("menu-btn-all");
@@ -85,6 +87,7 @@ const showImportant = () => {
   //goes through all the notes from all the projects and check if are important
   for (let project of projectList) {
     for (let note of project.noteList) {
+
       if (note.important == "true") {
         cardSection.appendChild(createNoteCard(note, project));
       }
@@ -106,49 +109,25 @@ const showAll = () => {
 //display's the notes with today due
 const showToday = () => {
   const cardSection = renderMenuContains();
-  for (let project of projectList) {
-    for (let note of project.noteList) {
-      if (isToday(parseISO(note.date))) {
-        cardSection.appendChild(createNoteCard(note, project));
-      }
-    }
-  }
+  noteFilter(isToday, cardSection);
 };
 
 //display's the notes with tommorow due
 const showTomorrow = () => {
   const cardSection = renderMenuContains();
-  for (let project of projectList) {
-    for (let note of project.noteList) {
-      if (isTomorrow(parseISO(note.date))) {
-        cardSection.appendChild(createNoteCard(note, project));
-      }
-    }
-  }
+  noteFilter(isTomorrow, cardSection);
 };
 
 //display's the notes with this week due
 const showWeek = () => {
   const cardSection = renderMenuContains();
-  for (let project of projectList) {
-    for (let note of project.noteList) {
-      if (isThisWeek(parseISO(note.date))) {
-        cardSection.appendChild(createNoteCard(note, project));
-      }
-    }
-  }
+  noteFilter(isThisWeek, cardSection);
 };
 
 //display's the notes with this month due
 const showMonth = () => {
   const cardSection = renderMenuContains();
-  for (let project of projectList) {
-    for (let note of project.noteList) {
-      if (isThisMonth(parseISO(note.date))) {
-        cardSection.appendChild(createNoteCard(note, project));
-      }
-    }
-  }
+  noteFilter(isThisMonth, cardSection);
 };
 
 //updates which which button is active
@@ -174,6 +153,17 @@ const renderMenuContains = () => {
   clearDisplay(cardSection);
   main.appendChild(cardSection);
   return cardSection;
+};
+
+//filters the notes by date
+const noteFilter = (time, sct) => {
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      if (time(parseISO(note.date))) {
+        sct.appendChild(createNoteCard(note, project));
+      }
+    }
+  }
 };
 
 //clears the content of the display
