@@ -101,9 +101,6 @@ const createNewNoteCardUi = (project) => {
       color.value
     );
     updateNotesMenu(project);
-    titleInput.value = "";
-    descriptionInput.value = "";
-    color.value = "#7eaaa1";
     card.classList.add("hidden");
     submitButton.removeEventListener("click", newNoteSubmitButtonListener);
   };
@@ -117,7 +114,7 @@ const editNoteCard = (note, project) => {
 
   const cardTitle = document.createElement("div");
   cardTitle.id = "new-note-card-ui-title";
-  cardTitle.textContent = "Add a new note";
+  cardTitle.textContent = "Edit";
 
   const form = document.createElement("form");
   form.id = "new-note-card-ui-form";
@@ -183,9 +180,6 @@ const editNoteCard = (note, project) => {
 
     event.preventDefault();
     updateNotesMenu(project);
-    titleInput.value = "";
-    descriptionInput.value = "";
-    color.value = "#7eaaa1";
     card.classList.add("hidden");
     submitButton.removeEventListener("click", updateNote);
   };
@@ -226,6 +220,7 @@ const createCardDoneBtn = (note) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
+  btn.textContent = "x";
   note.done
     ? (btn.style.backgroundColor = "green")
     : (btn.style.backgroundColor = "transparent");
@@ -244,6 +239,7 @@ const createCardEditBtn = (note, project) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
+  btn.textContent = "edit";
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
     note.editNote(project);
@@ -257,6 +253,7 @@ const createCardDeleteBtn = (note, project) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
+  btn.textContent = "delete";
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
     note.deleteNote(project);
@@ -308,4 +305,10 @@ const updateNotesMenu = (projects) => {
   }
 };
 
-export { createNewNoteCardUi, editNoteCard, addNewNoteBtn, updateNotesMenu, createNoteCard };
+export {
+  createNewNoteCardUi,
+  editNoteCard,
+  addNewNoteBtn,
+  updateNotesMenu,
+  createNoteCard,
+};
