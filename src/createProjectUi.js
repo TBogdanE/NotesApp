@@ -76,6 +76,9 @@ const createProjectMenuBtns = (project) => {
   deleteBtn.addEventListener("click", () => {
     deleteProject(project);
   });
+
+  setActiveBtn(newProjectBtn);
+  renderMain(project);
   return projectsContainer;
 };
 
