@@ -220,6 +220,7 @@ const createCardDoneBtn = (note) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
+  btn.style.borderColor = note.color;
   btn.textContent = "x";
   note.done
     ? (btn.style.backgroundColor = "green")
@@ -240,6 +241,7 @@ const createCardEditBtn = (note, project) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.textContent = "edit";
+  btn.style.borderColor = note.color;
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
     note.editNote(project);
@@ -254,6 +256,7 @@ const createCardDeleteBtn = (note, project) => {
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.textContent = "delete";
+  btn.style.borderColor = note.color;
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
     note.deleteNote(project);
