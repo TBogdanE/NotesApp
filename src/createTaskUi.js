@@ -110,6 +110,88 @@ const createNewNoteCardUi = (project) => {
   submitButton.addEventListener("click", newNoteSubmitButtonListener);
 };
 
+const editNoteCard = (note, project) => {
+  const main = document.getElementById("main");
+  const card = document.createElement("div");
+  card.id = "new-note-card-ui";
+
+  const cardTitle = document.createElement("div");
+  cardTitle.id = "new-note-card-ui-title";
+  cardTitle.textContent = "Add a new note";
+
+  const form = document.createElement("form");
+  form.id = "new-note-card-ui-form";
+
+  const titleInput = document.createElement("input");
+  titleInput.id = "new-note-card-ui-title-input";
+  titleInput.classList.add("new-note-card-ui-input");
+  titleInput.type = "text";
+  titleInput.placeholder = "Title";
+  titleInput.name = "new-note-label";
+  titleInput.value = note.title;
+
+  const descriptionInput = document.createElement("textarea");
+  descriptionInput.id = "new-note-card-ui-description-input";
+  descriptionInput.classList.add("new-note-card-ui-input");
+  descriptionInput.placeholder = "Description";
+  descriptionInput.value = note.text;
+
+  const cardBox = document.createElement("div");
+  cardBox.id = "new-note-card-ui-box";
+
+  const important = document.createElement("input");
+  important.id = "new-note-card-ui-important";
+  important.type = "checkbox";
+  important.value = note.important;
+  important.addEventListener("click", () => {
+    important.value = important.value === "false" ? "true" : "false";
+  });
+
+  const date = document.createElement("input");
+  date.id = "new-note-card-ui-add-date";
+  date.type = "date";
+  date.value = note.date;
+
+  const color = document.createElement("input");
+  color.id = "new-note-card-ui-color";
+  color.value = note.color;
+  color.type = "color";
+
+  const submitButton = document.createElement("button");
+  submitButton.textContent = "Submit";
+  submitButton.id = "new-note-card-ui-submit";
+
+  main.appendChild(card);
+  card.appendChild(cardTitle);
+  card.appendChild(form);
+  form.appendChild(titleInput);
+  form.appendChild(descriptionInput);
+  form.appendChild(cardBox);
+  cardBox.appendChild(important);
+  cardBox.appendChild(date);
+  cardBox.appendChild(color);
+  form.appendChild(submitButton);
+
+  // event listener that procees with the note creation
+  const updateNote = (event) => {
+    //prevents the refresh of the page
+    note.title = titleInput.value;
+    note.text = descriptionInput.value;
+    note.important = important.value;
+    note.date = date.value;
+    note.color = color.value;
+
+    event.preventDefault();
+    updateNotesMenu(project);
+    titleInput.value = "";
+    descriptionInput.value = "";
+    color.value = "#7eaaa1";
+    card.classList.add("hidden");
+    submitButton.removeEventListener("click", updateNote);
+  };
+  submitButton.addEventListener("click", updateNote);
+};
+
 //creates the UI for the card
 const createNoteCard = (note, projects) => {
   const noteCard = document.createElement("div");
@@ -122,7 +204,7 @@ const createNoteCard = (note, projects) => {
     createCardElements("note-card-important", note.important)
   );
   noteCard.appendChild(createCardElements("note-card-date", note.date));
-  noteCard.appendChild(createCardEditBtn(note));
+  noteCard.appendChild(createCardEditBtn(note, projects));
   noteCard.appendChild(createCardDeleteBtn(note, projects));
   return noteCard;
 };
@@ -158,13 +240,13 @@ const createCardDoneBtn = (note) => {
 };
 
 //creates the button that let user edit the note content
-const createCardEditBtn = (note) => {
+const createCardEditBtn = (note, project) => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("note-card-btn-container");
   const btn = document.createElement("button");
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
-    note.editNote(note);
+    note.editNote(project);
   });
   btnContainer.appendChild(btn);
   return btnContainer;
@@ -226,4 +308,4 @@ const updateNotesMenu = (projects) => {
   }
 };
 
-export { createNewNoteCardUi, addNewNoteBtn, updateNotesMenu, createNoteCard };
+export { createNewNoteCardUi, editNoteCard, addNewNoteBtn, updateNotesMenu, createNoteCard };

@@ -1,4 +1,4 @@
-import { updateNotesMenu } from "./createTaskUi";
+import { updateNotesMenu, editNoteCard } from "./createTaskUi";
 
 const _noteId = [];
 //the class on which other notes will be created
@@ -15,7 +15,7 @@ class Note {
 
   newId() {
     const id = Math.random().toString(36).substring(2, 12);
-    if(_noteId.includes(id)) {
+    if (_noteId.includes(id)) {
       return this.newId();
     }
     console.log(`Id: ${id}`);
@@ -26,8 +26,8 @@ class Note {
     this.done = !this.done;
   }
 
-  editNote() {
-    console.log("Edit");
+  editNote(project) {
+    editNoteCard(this, project);
   }
 
   deleteNote(project) {
