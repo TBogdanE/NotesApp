@@ -1,6 +1,13 @@
 import { projectList } from "./createProject";
 import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
+import {
+  isToday,
+  isTomorrow,
+  isThisWeek,
+  isThisMonth,
+  parseISO,
+} from "date-fns";
 //import {createTask} from './createTask';
 
 //starts the page showing all the notes
@@ -99,21 +106,49 @@ const showAll = () => {
 //display's the notes with today due
 const showToday = () => {
   const cardSection = renderMenuContains();
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      if (isToday(parseISO(note.date))) {
+        cardSection.appendChild(createNoteCard(note, project));
+      }
+    }
+  }
 };
 
 //display's the notes with tommorow due
 const showTomorrow = () => {
   const cardSection = renderMenuContains();
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      if (isTomorrow(parseISO(note.date))) {
+        cardSection.appendChild(createNoteCard(note, project));
+      }
+    }
+  }
 };
 
 //display's the notes with this week due
 const showWeek = () => {
   const cardSection = renderMenuContains();
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      if (isThisWeek(parseISO(note.date))) {
+        cardSection.appendChild(createNoteCard(note, project));
+      }
+    }
+  }
 };
 
 //display's the notes with this month due
 const showMonth = () => {
   const cardSection = renderMenuContains();
+  for (let project of projectList) {
+    for (let note of project.noteList) {
+      if (isThisMonth(parseISO(note.date))) {
+        cardSection.appendChild(createNoteCard(note, project));
+      }
+    }
+  }
 };
 
 //updates which which button is active
