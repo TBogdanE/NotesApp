@@ -16,6 +16,14 @@ const removeLocalStorage = () => {
   console.log(localStorage);
 };
 
+const initialLocalStorageCheck = (storageType) => {
+  if (!storageAvailable(storageType)) {
+    console.error("No local storage available");
+  } else {
+    checkLocalStorage();
+  }
+};
+
 const checkLocalStorage = () => {
   if (localStorage.getItem("projectList")) {
     const storedProjectList = JSON.parse(localStorage.getItem("projectList"));
@@ -60,6 +68,7 @@ const storageAvailable = (type) => {
 };
 
 export {
+  initialLocalStorageCheck,
   addToLocalStorage,
   removeFromLocalStorage,
   removeLocalStorage,

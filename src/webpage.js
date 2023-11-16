@@ -1,7 +1,7 @@
 import { projectList } from "./createProject";
 import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
-import { storageAvailable, checkLocalStorage, removeLocalStorage } from "./localStorageHandle";
+import { initialLocalStorageCheck, removeLocalStorage } from "./localStorageHandle";
 //date formatting library
 import {
   isToday,
@@ -16,11 +16,7 @@ import {
 const renderPage = () => {
   pageInitialisation();
   showAll();
-  if (!storageAvailable("localStorage")) {
-    console.error("No local storage available");
-  } else {
-    checkLocalStorage();
-  }
+  initialLocalStorageCheck('localStorage');
 };
 
 let activeMenuBtn;
@@ -94,7 +90,7 @@ const showImportant = () => {
 
   //goes through all the notes from all the projects and check if are important
   for (let project of projectList) {
-    for (let note of project.noteList) {
+    for (let note of project._noteList) {
       if (note.important == "true") {
         cardSection.appendChild(createNoteCard(note, project));
       }
@@ -107,7 +103,7 @@ const showAll = () => {
   const cardSection = renderMenuContains();
 
   for (let project of projectList) {
-    for (let note of project.noteList) {
+    for (let note of project._noteList) {
       cardSection.appendChild(createNoteCard(note, project));
     }
   }
@@ -165,7 +161,7 @@ const renderMenuContains = () => {
 //filters the notes by date
 const noteFilter = (time, sct) => {
   for (let project of projectList) {
-    for (let note of project.noteList) {
+    for (let note of project._noteList) {
       if (time(parseISO(note.date))) {
         sct.appendChild(createNoteCard(note, project));
       }
