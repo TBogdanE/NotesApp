@@ -301,8 +301,13 @@ const updateNotesMenu = (projects) => {
       showMonth();
       break;
     default:
-      for (let note of projects.noteList) {
-        cardSection.appendChild(createNoteCard(note, projects));
+      if (Array.isArray(projects._noteList) && projects._noteList.length > 0) {
+        for (let note of projects._noteList) {
+          cardSection.appendChild(createNoteCard(note, projects));
+        }
+      } else {
+        console.error("array is false");
+        console.log("projecc.notelist", projects._noteList);
       }
       break;
   }

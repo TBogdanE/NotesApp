@@ -1,5 +1,6 @@
 import { projectList } from "./createProject";
 import { updateProjectMenu } from "./createProjectUi";
+import { Note } from "./createTask";
 
 const addToLocalStorage = (projectList) => {
   localStorage.setItem("projectList", JSON.stringify(projectList));
@@ -16,14 +17,18 @@ const removeLocalStorage = () => {
 };
 
 const checkLocalStorage = () => {
-  if (!localStorage.getItem("projectList")) {
-    console.log(localStorage);
-    console.error("List not found!");
-  } else {
+  if (localStorage.getItem("projectList")) {
     const storedProjectList = JSON.parse(localStorage.getItem("projectList"));
+    storedProjectList.forEach((project) => {
+      project._noteList.forEach((note) => {
+        Object.setPrototypeOf(note, Note.prototype);
+      });
+    });
     projectList.length = 0;
     projectList.push(...storedProjectList);
     updateProjectMenu(projectList);
+  } else {
+    console.error("List not found!");
   }
 };
 

@@ -16,7 +16,7 @@ let projectList = [];
 class Project {
   constructor(name) {
     this.name = name;
-    this.noteList = [];
+    this._noteList = [];
   }
 
   get noteList() {

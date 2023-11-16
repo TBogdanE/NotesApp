@@ -76,7 +76,8 @@ const createProjectMenuBtns = (project) => {
   deleteBtn.addEventListener("click", () => {
     deleteProject(project);
   });
-
+  
+  //show the new created project
   setActiveBtn(newProjectBtn);
   renderMain(project);
   return projectsContainer;
