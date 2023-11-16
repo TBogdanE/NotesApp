@@ -1,6 +1,7 @@
 import { projectList } from "./createProject";
 import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
+import { storageAvailable, checkLocalStorage, removeLocalStorage } from "./localStorageHandle";
 //date formatting library
 import {
   isToday,
@@ -15,10 +16,10 @@ import {
 const renderPage = () => {
   pageInitialisation();
   showAll();
-  if (storageAvailable("localStorage")) {
-    console.log('works');
+  if (!storageAvailable("localStorage")) {
+    console.error("No local storage available");
   } else {
-    console.log('no');
+    checkLocalStorage();
   }
 };
 
@@ -34,6 +35,8 @@ const pageInitialisation = () => {
   const menuBtnMonth = document.getElementById("menu-btn-month");
   const createProjectBtn = document.getElementById("menu-btn-addproject");
   createProjectBtn.addEventListener("click", createNewProjectCardUi);
+  const deleteLocalStorageBtn = document.getElementById('footer-delete-storage-btn');
+  deleteLocalStorageBtn.addEventListener('click', removeLocalStorage);
   activeMenuBtn = menuBtnAll;
   changeMenu(
     menuBtnImportant,
@@ -178,37 +181,6 @@ const clearDisplay = (container) => {
   //const content = document.getElementById(id);
   //content.textContent = "";
 };
-
-function storageAvailable(type) {
-  let storage;
-  try {
-    storage = window[type];
-    const x = "__storage_test__";
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  } catch (e) {
-    return (
-      e instanceof DOMException &&
-      // everything except Firefox
-      (e.code === 22 ||
-        // Firefox
-        e.code === 1014 ||
-        // test name field too, because code might not be present
-        // everything except Firefox
-        e.name === "QuotaExceededError" ||
-        // Firefox
-        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
-      // acknowledge QuotaExceededError only if there's something already stored
-      storage &&
-      storage.length !== 0
-    );
-  }
-}
-
-const addToLocalStorage = (noteID, project) => {
-
-}
 
 export {
   showImportant,

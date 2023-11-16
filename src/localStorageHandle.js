@@ -1,0 +1,63 @@
+import { projectList } from "./createProject";
+import { updateProjectMenu } from "./createProjectUi";
+
+const addToLocalStorage = (projectList) => {
+  localStorage.setItem("projectList", JSON.stringify(projectList));
+  console.log(localStorage);
+};
+
+const removeFromLocalStorage = () => {};
+
+const removeLocalStorage = () => {
+  console.log(localStorage);
+  localStorage.clear();
+  console.log("Local storage deleted");
+  console.log(localStorage);
+};
+
+const checkLocalStorage = () => {
+  if (!localStorage.getItem("projectList")) {
+    console.log(localStorage);
+    console.error("List not found!");
+  } else {
+    const storedProjectList = JSON.parse(localStorage.getItem("projectList"));
+    projectList.length = 0;
+    projectList.push(...storedProjectList);
+    updateProjectMenu(projectList);
+  }
+};
+
+const storageAvailable = (type) => {
+  let storage;
+  try {
+    storage = window[type];
+    const x = "__storage_test__";
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return (
+      e instanceof DOMException &&
+      // everything except Firefox
+      (e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === "QuotaExceededError" ||
+        // Firefox
+        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      storage &&
+      storage.length !== 0
+    );
+  }
+};
+
+export {
+  addToLocalStorage,
+  removeFromLocalStorage,
+  removeLocalStorage,
+  checkLocalStorage,
+  storageAvailable,
+};
