@@ -4,7 +4,7 @@ import {
   addToLocalStorage,
   removeFromLocalStorage,
   removeLocalStorage,
-  storageAvailable
+  storageAvailable,
 } from "./localStorageHandle";
 
 //VARIABLE DECLARATION
@@ -33,10 +33,6 @@ const addNewProject = (name) => {
   const projectName = new Project(name);
   projectList.push(projectName);
   updateProjectMenu(projectList);
-  //handle localStorage of the newProject
-  if(storageAvailable) {
-    addToLocalStorage(projectList);
-  }
   //return projectName;
 };
 
@@ -46,6 +42,10 @@ const deleteProject = (project) => {
   if (indexOfProject >= 0 && indexOfProject < projectList.length) {
     projectList.splice(indexOfProject, 1);
     updateProjectMenu(projectList);
+    //handle localStorage of the newProject
+    if (storageAvailable) {
+      addToLocalStorage(projectList);
+    }
   }
 };
 

@@ -45,6 +45,10 @@ class Note {
     if (noteIndex !== -1) {
       project._noteList.splice(noteIndex, 1);
       updateNotesMenu(project);
+      //handle localStorage of the newProject
+      if (storageAvailable) {
+        addToLocalStorage(projectList);
+      }
       console.log(`Note: ${this.title} from ${project.name} was removed`);
     }
   }
