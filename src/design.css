@@ -338,7 +338,7 @@ header {
   background-color: var(--body);
   border: 0.1em solid var(--text2);
   border-radius: 8px;
-  color: var(--text1);
+  color: var(--text2);
   margin: 0.5em;
 }
 
