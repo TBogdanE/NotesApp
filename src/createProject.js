@@ -1,11 +1,6 @@
 //IMPORTS//
 import { updateProjectMenu } from "./createProjectUi";
-import {
-  addToLocalStorage,
-  removeFromLocalStorage,
-  removeLocalStorage,
-  storageAvailable,
-} from "./localStorageHandle";
+import { addToLocalStorage, storageAvailable } from "./localStorageHandle";
 
 //VARIABLE DECLARATION
 //const main = document.getElementById("main");
@@ -33,6 +28,9 @@ const addNewProject = (name) => {
   const projectName = new Project(name);
   projectList.push(projectName);
   updateProjectMenu(projectList);
+  if (storageAvailable) {
+    addToLocalStorage(projectList);
+  }
   //return projectName;
 };
 
