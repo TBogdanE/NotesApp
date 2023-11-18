@@ -1,11 +1,12 @@
 import { projectList } from "./createProject";
 import { updateProjectMenu } from "./createProjectUi";
 import { Note } from "./createTask";
+import { updateFooterNumbers } from "./webpage";
 
 const addToLocalStorage = (projectList) => {
   if (storageAvailable) {
     localStorage.setItem("projectList", JSON.stringify(projectList));
-    console.log(localStorage);
+    updateFooterNumbers();
   } else {
     console.error("Cannot add to local storage");
   }
@@ -39,6 +40,7 @@ const checkLocalStorage = () => {
     projectList.length = 0;
     projectList.push(...storedProjectList);
     updateProjectMenu(projectList);
+    updateFooterNumbers();
   } else {
     console.error("List not found!");
   }

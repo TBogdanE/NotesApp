@@ -1,7 +1,10 @@
 import { projectList } from "./createProject";
 import { createNewProjectCardUi } from "./createProjectUi";
 import { createNoteCard } from "./createTaskUi";
-import { initialLocalStorageCheck, removeLocalStorage } from "./localStorageHandle";
+import {
+  initialLocalStorageCheck,
+  removeLocalStorage,
+} from "./localStorageHandle";
 //date formatting library
 import {
   isToday,
@@ -16,7 +19,7 @@ import {
 const renderPage = () => {
   pageInitialisation();
   showAll();
-  initialLocalStorageCheck('localStorage');
+  initialLocalStorageCheck("localStorage");
 };
 
 let activeMenuBtn;
@@ -31,8 +34,10 @@ const pageInitialisation = () => {
   const menuBtnMonth = document.getElementById("menu-btn-month");
   const createProjectBtn = document.getElementById("menu-btn-addproject");
   createProjectBtn.addEventListener("click", createNewProjectCardUi);
-  const deleteLocalStorageBtn = document.getElementById('footer-delete-storage-btn');
-  deleteLocalStorageBtn.addEventListener('click', removeLocalStorage);
+  const deleteLocalStorageBtn = document.getElementById(
+    "footer-delete-storage-btn"
+  );
+  deleteLocalStorageBtn.addEventListener("click", removeLocalStorage);
   activeMenuBtn = menuBtnAll;
   changeMenu(
     menuBtnImportant,
@@ -169,6 +174,17 @@ const noteFilter = (time, sct) => {
   }
 };
 
+const updateFooterNumbers = () => {
+  const projectsNo = document.getElementById("footer-number-projects");
+  const notesNo = document.getElementById("footer-number-notes");
+  let numberOfNotes = 0;
+  for (let project of projectList) {
+    numberOfNotes += project._noteList.length;
+  }
+  projectsNo.textContent = `${projectList.length} projects`;
+  notesNo.textContent = `${numberOfNotes} notes`;
+};
+
 //clears the content of the display
 const clearDisplay = (container) => {
   while (container.firstChild) {
@@ -189,4 +205,5 @@ export {
   renderPage,
   clearDisplay,
   setActiveBtn,
+  updateFooterNumbers,
 };
