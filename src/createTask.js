@@ -1,11 +1,6 @@
 import { projectList } from "./createProject";
-import { updateNotesMenu, editNoteCard } from "./createTaskUi";
-import {
-  addToLocalStorage,
-  checkLocalStorage,
-  removeFromLocalStorage,
-  storageAvailable,
-} from "./localStorageHandle";
+import { updateNotesMenu } from "./createTaskUi";
+import { addToLocalStorage } from "./localStorageHandle";
 
 const _noteId = [];
 //the class on which other notes will be created
@@ -33,8 +28,8 @@ class Note {
     this.done = !this.done;
   }
 
-  editNote(project) {
-    editNoteCard(this, project);
+  editNote() {
+    addToLocalStorage(projectList);
   }
 
   deleteNote(project) {
@@ -46,9 +41,7 @@ class Note {
       project._noteList.splice(noteIndex, 1);
       updateNotesMenu(project);
       //handle localStorage of the newProject
-      if (storageAvailable) {
-        addToLocalStorage(projectList);
-      }
+      addToLocalStorage(projectList);
       console.log(`Note: ${this.title} from ${project.name} was removed`);
     }
   }
@@ -59,9 +52,7 @@ const createNewNote = (project, title, text, important, date, color) => {
   const note = new Note(title, text, important, date, color);
   //pushes the note to it's project noteList
   project._noteList.push(note);
-  if (storageAvailable) {
-    addToLocalStorage(projectList);
-  }
+  addToLocalStorage(projectList);
 };
 
 export { Note, createNewNote };

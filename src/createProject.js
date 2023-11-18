@@ -1,6 +1,6 @@
 //IMPORTS//
 import { updateProjectMenu } from "./createProjectUi";
-import { addToLocalStorage, storageAvailable } from "./localStorageHandle";
+import { addToLocalStorage } from "./localStorageHandle";
 
 //VARIABLE DECLARATION
 //const main = document.getElementById("main");
@@ -28,10 +28,7 @@ const addNewProject = (name) => {
   const projectName = new Project(name);
   projectList.push(projectName);
   updateProjectMenu(projectList);
-  if (storageAvailable) {
-    addToLocalStorage(projectList);
-  }
-  //return projectName;
+  addToLocalStorage(projectList);
 };
 
 //handling the logic of deleting projects
@@ -41,9 +38,7 @@ const deleteProject = (project) => {
     projectList.splice(indexOfProject, 1);
     updateProjectMenu(projectList);
     //handle localStorage of the newProject
-    if (storageAvailable) {
-      addToLocalStorage(projectList);
-    }
+    addToLocalStorage(projectList);
   }
 };
 

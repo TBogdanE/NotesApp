@@ -3,8 +3,12 @@ import { updateProjectMenu } from "./createProjectUi";
 import { Note } from "./createTask";
 
 const addToLocalStorage = (projectList) => {
-  localStorage.setItem("projectList", JSON.stringify(projectList));
-  console.log(localStorage);
+  if (storageAvailable) {
+    localStorage.setItem("projectList", JSON.stringify(projectList));
+    console.log(localStorage);
+  } else {
+    console.error("Cannot add to local storage");
+  }
 };
 
 const removeFromLocalStorage = () => {};

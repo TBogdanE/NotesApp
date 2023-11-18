@@ -179,6 +179,8 @@ const editNoteCard = (note, project) => {
     note.color = color.value;
 
     event.preventDefault();
+    //clearDisplay(main);
+    note.editNote();
     updateNotesMenu(project);
     card.classList.add("hidden");
     submitButton.removeEventListener("click", updateNote);
@@ -244,7 +246,8 @@ const createCardEditBtn = (note, project) => {
   btn.style.borderColor = note.color;
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
-    note.editNote(project);
+    //note.editNote(project);
+    editNoteCard(note, project);
   });
   btnContainer.appendChild(btn);
   return btnContainer;
