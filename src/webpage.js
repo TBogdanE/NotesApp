@@ -13,12 +13,12 @@ import {
   isThisMonth,
   parseISO,
 } from "date-fns";
-//import {createTask} from './createTask';
 
-//starts the page showing all the notes
+//starts the page, displaying showAll notes menu
 const renderPage = () => {
   pageInitialisation();
   showAll();
+  //checks if local storage is available
   initialLocalStorageCheck("localStorage");
 };
 
@@ -34,10 +34,15 @@ const pageInitialisation = () => {
   const menuBtnMonth = document.getElementById("menu-btn-month");
   const createProjectBtn = document.getElementById("menu-btn-addproject");
   createProjectBtn.addEventListener("click", createNewProjectCardUi);
+
+  //clears everything in storage
   const deleteLocalStorageBtn = document.getElementById(
     "footer-delete-storage-btn"
   );
-  deleteLocalStorageBtn.addEventListener("click", removeLocalStorage);
+  deleteLocalStorageBtn.addEventListener("click", () => {
+    removeLocalStorage();
+    location.reload();
+  });
   activeMenuBtn = menuBtnAll;
   changeMenu(
     menuBtnImportant,
@@ -93,7 +98,7 @@ const changeMenu = (
 const showImportant = () => {
   const cardSection = renderMenuContains();
 
-  //goes through all the notes from all the projects and check if are important
+  //goes through all the notes from all the projects and checks which are important
   for (let project of projectList) {
     for (let note of project._noteList) {
       if (note.important == "true") {
@@ -174,6 +179,7 @@ const noteFilter = (time, sct) => {
   }
 };
 
+//updates and show the number of projects/notes
 const updateFooterNumbers = () => {
   const projectsNo = document.getElementById("footer-number-projects");
   const notesNo = document.getElementById("footer-number-notes");
@@ -190,8 +196,6 @@ const clearDisplay = (container) => {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
-  //const content = document.getElementById(id);
-  //content.textContent = "";
 };
 
 export {
