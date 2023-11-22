@@ -34,13 +34,23 @@ const createNewProjectCardUi = () => {
   form.appendChild(nameInput);
   form.appendChild(submitButton);
 
+  const escapeKeyListener = (event) => {
+    if (event.key === "Escape") {
+      main.removeChild(card);
+      // Remove the event listener when the card is hidden
+      document.removeEventListener("keydown", escapeKeyListener);
+    }
+  };
+
+  document.addEventListener("keydown", escapeKeyListener);
+
   //button that sumbits the new project
   const newProjectSubmitButtonListener = (event) => {
     event.preventDefault();
+    main.removeChild(card);
     clearDisplay(main);
     addNewProject(nameInput.value);
-    nameInput.value = "";
-    card.classList.add("hidden");
+    //card.classList.add("hidden");
     // Unregister the event listener
     submitButton.removeEventListener("click", newProjectSubmitButtonListener);
   };
@@ -48,9 +58,9 @@ const createNewProjectCardUi = () => {
   submitButton.addEventListener("click", newProjectSubmitButtonListener);
 };
 
-//creates the button used for creating new notes
+//ads the button used for creating new notes and adds the notes on the screen
 const renderMain = (project) => {
-  //clearDisplay();
+  //adds the button used for toggling the card ui used for creating new notes
   addNewNoteBtn(project);
   updateNotesMenu(project);
 };
@@ -67,7 +77,6 @@ const createProjectMenuBtns = (project) => {
   newProjectBtn.addEventListener("click", () => {
     setActiveBtn(newProjectBtn);
     renderMain(project);
-    console.log(project.name);
   });
 
   const deleteBtn = document.createElement("button");
@@ -85,16 +94,11 @@ const createProjectMenuBtns = (project) => {
 
 //updates the project section of the menu with the projects
 const updateProjectMenu = (projectList) => {
-  //const main = document.getElementById("main");
   const menuProjects = document.getElementById("menu-projects");
   clearDisplay(menuProjects);
-  //menuProjects.textContent = "";
   for (let project of projectList) {
     menuProjects.appendChild(createProjectMenuBtns(project));
   }
-  console.log(
-    `Project list: ${projectList} \n Number of projects: ${projectList.length}`
-  );
 };
 
 export { createNewProjectCardUi, createProjectMenuBtns, updateProjectMenu };

@@ -87,6 +87,15 @@ const createNewNoteCardUi = (project) => {
   cardBox.appendChild(color);
   form.appendChild(submitButton);
 
+  const escapeKeyListener = (event) => {
+    if (event.key === "Escape") {
+      main.removeChild(card);
+      // Remove the event listener when the card is hidden
+      document.removeEventListener("keydown", escapeKeyListener);
+    }
+  };
+  document.addEventListener("keydown", escapeKeyListener);
+
   // event listener that procees with the note creation
   const newNoteSubmitButtonListener = (event) => {
     //prevents the refresh of the page
@@ -101,12 +110,14 @@ const createNewNoteCardUi = (project) => {
       color.value
     );
     updateNotesMenu(project);
-    card.classList.add("hidden");
+    main.removeChild(card);
+    //card.classList.add("hidden");
     submitButton.removeEventListener("click", newNoteSubmitButtonListener);
   };
   submitButton.addEventListener("click", newNoteSubmitButtonListener);
 };
 
+//toggles the card used for editing the notes
 const editNoteCard = (note, project) => {
   const main = document.getElementById("main");
   const card = document.createElement("div");
@@ -169,9 +180,18 @@ const editNoteCard = (note, project) => {
   cardBox.appendChild(color);
   form.appendChild(submitButton);
 
+  const escapeKeyListener = (event) => {
+    if (event.key === "Escape") {
+      main.removeChild(card);
+      // Remove the event listener when the card is hidden
+      document.removeEventListener("keydown", escapeKeyListener);
+    }
+  };
+  document.addEventListener("keydown", escapeKeyListener);
+
   // event listener that procees with the note creation
   const updateNote = (event) => {
-    //prevents the refresh of the page
+    //assigning to the input fields the old data
     note.title = titleInput.value;
     note.text = descriptionInput.value;
     note.important = important.value;
@@ -182,7 +202,8 @@ const editNoteCard = (note, project) => {
     //clearDisplay(main);
     note.editNote();
     updateNotesMenu(project);
-    card.classList.add("hidden");
+    main.removeChild(card);
+    //card.classList.add("hidden");
     submitButton.removeEventListener("click", updateNote);
   };
   submitButton.addEventListener("click", updateNote);
@@ -246,7 +267,6 @@ const createCardEditBtn = (note, project) => {
   btn.style.borderColor = note.color;
   btn.classList.add("note-card-btn");
   btn.addEventListener("click", () => {
-    //note.editNote(project);
     editNoteCard(note, project);
   });
   btnContainer.appendChild(btn);
@@ -283,7 +303,7 @@ const updateNotesMenu = (projects) => {
   clearDisplay(cardSection);
   main.appendChild(cardSection);
 
-  //displays all the notes inside a project
+  //displays all the notes inside a specific project
   switch (activeMenuBtn.textContent) {
     case "Important":
       showImportant();
@@ -304,13 +324,14 @@ const updateNotesMenu = (projects) => {
       showMonth();
       break;
     default:
+      //displays the notes of a user made project
+      //checks if the array is available and if it's note empty
       if (Array.isArray(projects._noteList) && projects._noteList.length > 0) {
         for (let note of projects._noteList) {
           cardSection.appendChild(createNoteCard(note, projects));
         }
       } else {
         console.error("array is false");
-        console.log("projecc.notelist", projects._noteList);
       }
       break;
   }
