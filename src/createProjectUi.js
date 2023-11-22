@@ -22,6 +22,9 @@ const createNewProjectCardUi = () => {
   nameInput.id = "main-create-new-project-input";
   nameInput.placeholder = "Project Name:";
   nameInput.name = "new-project-label";
+  nameInput.minLength = 3;
+  nameInput.maxLength = 15;
+  nameInput.required = require;
 
   const submitButton = document.createElement("input");
   submitButton.type = "submit";
@@ -46,6 +49,11 @@ const createNewProjectCardUi = () => {
 
   //button that sumbits the new project
   const newProjectSubmitButtonListener = (event) => {
+    if (
+      nameInput.value.trim().length < nameInput.minLength ||
+      nameInput.value.trim().length > nameInput.maxLength
+    )
+      return;
     event.preventDefault();
     main.removeChild(card);
     clearDisplay(main);

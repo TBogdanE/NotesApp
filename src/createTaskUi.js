@@ -46,11 +46,16 @@ const createNewNoteCardUi = (project) => {
   titleInput.type = "text";
   titleInput.placeholder = "Title";
   titleInput.name = "new-note-label";
+  titleInput.minLength = 3;
+  titleInput.maxLength = 15;
+  titleInput.required = require;
 
   const descriptionInput = document.createElement("textarea");
   descriptionInput.id = "new-note-card-ui-description-input";
   descriptionInput.classList.add("new-note-card-ui-input");
   descriptionInput.placeholder = "Description";
+  descriptionInput.minLength = 2;
+  descriptionInput.maxLength = 30;
 
   const cardBox = document.createElement("div");
   cardBox.id = "new-note-card-ui-box";
@@ -98,6 +103,17 @@ const createNewNoteCardUi = (project) => {
 
   // event listener that procees with the note creation
   const newNoteSubmitButtonListener = (event) => {
+    if (
+      titleInput.value.trim().length < titleInput.minLength ||
+      titleInput.value.trim().length > titleInput.maxLength
+    )
+      return;
+    if (
+      (descriptionInput.value.trim().length !== 0 &&
+        descriptionInput.value.trim().length < descriptionInput.minLength) ||
+      descriptionInput.value.trim().length > descriptionInput.maxLength
+    )
+      return;
     //prevents the refresh of the page
     event.preventDefault();
     //creates the new note with the user inputs
@@ -137,12 +153,17 @@ const editNoteCard = (note, project) => {
   titleInput.placeholder = "Title";
   titleInput.name = "new-note-label";
   titleInput.value = note.title;
+  titleInput.minLength = 3;
+  titleInput.maxLength = 15;
+  titleInput.required = require;
 
   const descriptionInput = document.createElement("textarea");
   descriptionInput.id = "new-note-card-ui-description-input";
   descriptionInput.classList.add("new-note-card-ui-input");
   descriptionInput.placeholder = "Description";
   descriptionInput.value = note.text;
+  descriptionInput.minLength = 2;
+  descriptionInput.maxLength = 30;
 
   const cardBox = document.createElement("div");
   cardBox.id = "new-note-card-ui-box";
