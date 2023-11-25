@@ -3,7 +3,7 @@ import { updateProjectMenu } from "./createProjectUi";
 import { Note } from "./createTask";
 import { updateFooterNumbers } from "./webpage";
 
-const addToLocalStorage = (projectList) => {
+const updateLocalStorage = (projectList) => {
   if (storageAvailable) {
     localStorage.setItem("projectList", JSON.stringify(projectList));
     updateFooterNumbers();
@@ -12,13 +12,8 @@ const addToLocalStorage = (projectList) => {
   }
 };
 
-const removeFromLocalStorage = () => {};
-
 const removeLocalStorage = () => {
-  console.log(localStorage);
   localStorage.clear();
-  console.log("Local storage deleted");
-  console.log(localStorage);
 };
 
 const initialLocalStorageCheck = (storageType) => {
@@ -42,7 +37,7 @@ const checkLocalStorage = () => {
     updateProjectMenu(projectList);
     updateFooterNumbers();
   } else {
-    console.error("List not found!");
+    console.error("Local storage data was not found!");
   }
 };
 
@@ -73,11 +68,4 @@ const storageAvailable = (type) => {
   }
 };
 
-export {
-  initialLocalStorageCheck,
-  addToLocalStorage,
-  removeFromLocalStorage,
-  removeLocalStorage,
-  checkLocalStorage,
-  storageAvailable,
-};
+export { initialLocalStorageCheck, updateLocalStorage, removeLocalStorage };
